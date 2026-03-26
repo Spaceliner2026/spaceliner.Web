@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUG STATUS | Spaceliner Official</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        /* 閲覧用プラットフォーム特有のスタイル */
+        .status-tag {
+            padding: 2px 8px; font-size: 0.7rem; font-weight: bold; border-radius: 2px; text-transform: uppercase;
+        }
+        .st-open { background: var(--accent-red); color: #fff; }
+        .st-work { background: #ffaa00; color: #000; }
+        .st-done { background: var(--accent-blue); color: #000; }
+
+        .bug-card {
+            border-left: 4px solid var(--ui-mid);
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .bug-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--accent-blue);
+        }
+        .bug-card.active {
+            background: rgba(0, 210, 255, 0.05);
+            border-left-color: var(--accent-blue);
+        }
+
+        .detail-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .bug-card.active .detail-content {
+            max-height: 500px; /* 十分な高さ */
+            padding: 15px 0;
+            border-top: 1px solid var(--ui-mid);
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container">
+        <div class="scanlines"></div>
+        <div class="grid-3d"></div>
+    </div>
+
+    <nav class="side-nav">
+        <ul>
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="support.html">SUPPORT</a></li>
+            <li><a href="report.html">STATUS</a></li>
+        </ul>
+    </nav>
+
+    <header class="support-hero">
+        <div class="hero-content">
+            <h1>SYSTEM LOGS</h1>
+            <p>DIAGNOSTIC DATA REPOSITORY</p>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <h2 class="sl-title">TRACKING ISSUES</h2>
+            
+            <div class="filter-group">
+                <p style="font-size: 0.7rem; color: var(--accent-blue); margin-bottom: 12px; letter-spacing: 2px;">FILTER BY TAG</p>
+                <div id="tag-buttons" style="display: flex; flex-wrap: wrap; gap: 8px;"></div>
+                <button class="tag-btn reset" style="margin-top: 15px;" onclick="filterByTag('')">SHOW ALL</button>
+            </div>
+
+            <div id="bug-container" class="bug-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>PROJECT SPACELINER // KANKITU SYSTEM 2026</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        const container = document.getElementById('bug-container');
+        const tagContainer = document.getElementById('tag-buttons');
+
+        function initTags() {
+            const tags = new Set();
+            BUG_CATEGORIES.forEach(item => item.tags.forEach(t => tags.add(t)));
+            tagContainer.innerHTML = '';
+            tags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-btn';
+                btn.innerText = tag;
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    filterByTag(tag);
+                };
+                tagContainer.appendChild(btn);
+            });
+        }
+
+        function renderLogs(filterTag = '') {
+            container.innerHTML = '';
+            const data = filterTag ? BUG_CATEGORIES.filter(i => i.tags.includes(filterTag)) : BUG_CATEGORIES;
+
+            data.forEach(item => {
+                let statusCls = item.status === '対応済' ? 'st-done' : (item.status === '未確認' ? 'st-open' : 'st-work');
+                
+                const card = document.createElement('div');
+                card.className = 'news-item bug-card';
+                // クリックでactiveクラスを切り替え（詳細表示）
+                card.onclick = () => card.classList.toggle('active');
+
+                card.innerHTML = `
+                    <div class="news-meta">
+                        <span class="status-tag ${statusCls}">${item.status}</span>
+                        <span style="font-size:0.7rem; opacity:0.5; margin-left:10px;">ID: ${item.id}</span>
+                    </div>
+                    <h3 class="news-headline">${item.title}</h3>
+                    
+                    <div class="detail-content">
+                        <strong style="display:block; margin-bottom:5px; color:var(--accent-blue);">■ 詳細・対応状況</strong>
+                        ${item.detail}
+                        <p style="margin-top:10px; font-size:0.75rem; opacity:0.6;">最終確認日: ${item.lastCheck} / 優先度: ${item.risk}</p>
+                    </div>
+
+                    <div style="display:flex; gap:5px; margin-top:10px;">
+                        ${item.tags.map(t => `<span style="font-size:0.6rem; border:1px solid #333; padding:2px 5px; color:var(--accent-blue);">${t}</span>`).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterByTag(tag) {
+            renderLogs(tag);
+            document.querySelectorAll('.tag-btn').forEach(b => b.classList.toggle('active', b.innerText === tag));
+        }
+
+        window.onload = () => { initTags(); renderLogs(); };
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaceliner | Official Site</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-container">
+        <div class="scanlines"></div>
+        <div class="grid-3d"></div>
+        <div class="cross-line-l"></div>
+        <div class="cross-line-r"></div>
+    </div>
+
+    <nav class="side-nav">
+        <ul>
+            <li><a href="#top">TOP</a></li>
+            <li><a href="#news">NEWS</a></li>
+            <li><a href="#tracks">MUSIC</a></li>
+            <li><a href="support.html">SUPPORT</a></li>
+            <li><a href="#download">DL</a></li>
+        </ul>
+    </nav>
+
+    <header id="top" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content fade-in">
+            <div class="logo-area">
+                <img src="spaceliner_icon_1024.png" alt="Icon" class="hero-icon">
+                <h1>SPACELINER</h1>
+            </div>
+            <p class="hero-tagline">SYNCED WITH THE GALAXY</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="news">
+            <h2 class="sl-title">NEWS</h2>
+            <div id="news-container" class="news-scroll-area">
+                <p class="loading">SYNCING DATA...</p>
+            </div>
+        </section>
+
+        <section id="tracks">
+            <h2 class="sl-title">TRACKLIST</h2>
+            <div class="track-container">
+                <div class="track-row side-l">
+                    <div class="track-cell">
+                        <span class="lv-label">Lv.1</span>
+                        <div class="track-text"><span class="title">メリーさんの羊</span><span class="artist">KANKITU Remix</span></div>
+                    </div>
+                </div>
+                <div class="track-row side-r">
+                    <div class="track-cell">
+                        <span class="lv-label">Lv.4</span>
+                        <div class="track-text"><span class="title">$E=mc^2$</span><span class="artist">Mathematical Beat</span></div>
+                    </div>
+                </div>
+                <div class="track-row side-l">
+                    <div class="track-cell">
+                        <span class="lv-label">Lv.5</span>
+                        <div class="track-text"><span class="title">Divine Retribution</span><span class="artist">High-Speed Chaos</span></div>
+                    </div>
+                </div>
+                <div class="track-row side-r">
+                    <div class="track-cell">
+                        <span class="lv-label">Lv.6</span>
+                        <div class="track-text"><span class="title">P0pL0ck</span><span class="artist">Digital Pulse</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="judgement">
+            <h2 class="sl-title">SYSTEM</h2>
+            <div class="result-ui-mock">
+                <div class="result-header">JUDGEMENT PARAMETER</div>
+                <div class="result-body">
+                    <div class="judge-row"><span class="label">SYNCED</span><span class="desc">完全同期</span></div>
+                    <div class="judge-row"><span class="label">LINKED</span><span class="desc">接続</span></div>
+                    <div class="judge-row"><span class="label">NOISE</span><span class="desc">誤差あり</span></div>
+                    <div class="judge-row"><span class="label">LOST</span><span class="desc">紛失</span></div>
+                    <div class="judge-row error"><span class="label">ERROR</span><span class="desc">異常</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download">
+            <h2 class="sl-title">DOWNLOAD</h2>
+            <div class="dl-card">
+                <a href="https://github.com/ONSOU2025/Spaceliner/releases/download/Spaceliner_Installer/Spaceliner_setup.zip" class="dl-button" target="_blank">ACCESS DRIVE</a>
+                <div class="spec-grid">
+                    <div class="spec-item">
+                        <h4 class="sub-title">SYSTEM REQUIREMENTS</h4>
+                        <ul>
+                            <li>Windows 10 / 11 (64bit)</li>
+                            <li>macOS Big Sur+</li>
+                            <li>Intel Core i3 / 4GB RAM</li>
+                        </ul>
+                    </div>
+                    <div class="spec-item caution">
+                        <h4 class="sub-title">CAUTION</h4>
+                        <ul>
+                            <li>Zipは必ず「すべて展開」してください</li>
+                            <li>詳細情報はSUPPORTページを確認してください</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>PROJECT SPACELINER // BY KANKITU</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        function renderNews() {
+            const container = document.getElementById('news-container');
+            if(!container || !NEWS_DATA) return;
+            container.innerHTML = '';
+            NEWS_DATA.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'news-item';
+                const body = item.body.replace(/\n/g, '<br>');
+                let link = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
+                div.innerHTML = `
+                    <div class="news-meta"><span class="news-date">${item.date}</span><h3 class="news-headline">${item.title}</h3></div>
+                    <div class="news-body">${body}</div>${link}`;
+                container.appendChild(div);
+            });
+        }
+        renderNews();
+    </script>
+</body>
+</html>
