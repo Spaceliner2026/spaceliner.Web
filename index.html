@@ -50,6 +50,30 @@
             <h2 class="sl-title">TRACKLIST</h2>
             <div class="search-container">
                 <input type="text" id="track-search" placeholder="SEARCH TRACK OR ARTIST..." oninput="filterTracks()">
+                <div class="filter-group">
+                    <label class="filter-item">
+                        <input type="checkbox" value="ST" checked onchange="filterTracks()">
+                        <span class="filter-label st-color">STANDARD</span>
+                    </label>
+                    <label class="filter-item">
+                        <input type="checkbox" value="FD" checked onchange="filterTracks()">
+                        <span class="filter-label fd-color">FULL DRIVE</span>
+                    </label>
+                    <label class="filter-item">
+                        <input type="checkbox" value="OD" checked onchange="filterTracks()">
+                        <span class="filter-label od-color">OVERDRIVE</span>
+                    </label>
+                    <label class="filter-item">
+                        <input type="checkbox" value="UL" checked onchange="filterTracks()">
+                        <span class="filter-label ul-color">UNLIMITED</span>
+                    </label>
+                    <div class="level-range-filter">
+                        <span>Lv.</span>
+                        <input type="number" id="lv-min" min="1" max="30" placeholder="MIN" oninput="filterTracks()">
+                        <span>〜</span>
+                        <input type="number" id="lv-max" min="1" max="30" placeholder="MAX" oninput="filterTracks()">
+                    </div>
+                </div>
             </div>
             <div class="track-scroll-area">
                 <div id="track-container" class="track-container">
@@ -124,20 +148,45 @@
         // 検索フィルタリング用の関数
         function filterTracks() {
             const keyword = document.getElementById('track-search').value.toLowerCase();
-            renderTracks(keyword);
-        }
+            const selectedLevels = Array.from(document.querySelectorAll('.filter-group input[type="checkbox"]:checked'))
+                                        .map(cb => cb.value);
 
-        // Tracksの呼び出し（引数で検索ワードを受け取るよう修正）
-        function renderTracks(searchKeyword = "") {
+            // 入力がない場合は、最小を0、最大を99として扱う
+            const minInput = document.getElementById('lv-min').value;
+            const maxInput = document.getElementById('lv-max').value;
+
+            // 数値入力の値を取得（空の場合は制限なし）
+            const minLv = minInput === "" ? 0 : parseInt(minInput);
+            const maxLv = maxInput === "" ? 99 : parseInt(maxInput);
+
+            renderTracks(keyword, selectedLevels, minLv, maxLv);
+        }
+        // ページ読み込み時に全ての曲パネルを表示するための初期実行
+        window.onload = function() {
+            renderNews();
+            // 初期状態（空検索、全難易度、Lv0〜99）で呼び出し
+            renderTracks("", ["ST", "FD", "OD", "UL"], 0, 99); 
+        };
+
+        function renderTracks(searchKeyword = "", selectedLevels = [], minLv = 0, maxLv = 99) {
             const container = document.getElementById('track-container');
-           if(!container || !MUSIC_DATA) return;
+            if(!container || !MUSIC_DATA) return;
             container.innerHTML = '';
 
-            // 検索ワードでフィルタリング
             const filteredData = MUSIC_DATA.filter(track => {
-                const title = track.title.toLowerCase();
-                const artist = track.artist.toLowerCase();
-                return title.includes(searchKeyword) || artist.includes(searchKeyword);
+                // 1. 検索ワード判定
+                const matchesKeyword = track.title.toLowerCase().includes(searchKeyword) || 
+                                       track.artist.toLowerCase().includes(searchKeyword);
+        
+                // 2. 難易度種類 & 数値判定
+                // 選択された各難易度（ST, FD等）のうち、一つでも「数値が範囲内」であれば合格
+                const hasMatchingLevel = selectedLevels.some(lv => {
+                    const lvValue = parseInt(track[lv]);
+                    if (!lvValue) return false; // その難易度が存在しない場合は除外
+                    return lvValue >= minLv && lvValue <= maxLv;
+                });
+
+                return matchesKeyword && hasMatchingLevel;
             });
 
             if (filteredData.length === 0) {
@@ -145,26 +194,29 @@
                 return;
             }
 
+            // 描画処理
             filteredData.forEach((track, index) => {
                 const sideClass = (index % 2 === 0) ? 'side-l' : 'side-r';
                 const div = document.createElement('div');
                 div.className = `track-row ${sideClass}`;
-
-                const getLvHtml = (label, value) => {
+        
+               const getLvHtml = (label, value) => {
                     if (!value || value === "") return "";
                     return `<div class="${label}-label">Lv.${value}</div>`;
                 };
-            
+                    
                 div.innerHTML = `
                     <div class="track-cell">
                         <div class="track-info">
                             <span class="track-artist">${track.artist}</span>
                             <span class="track-title">${track.title}</span>
                         </div>
-                        ${getLvHtml('ST', track.ST)}
-                        ${getLvHtml('FD', track.FD)}
-                        ${getLvHtml('OD', track.OD)}
-                        ${getLvHtml('UL', track.UL)}
+                        <div class="track-levels">
+                            ${getLvHtml('ST', track.ST)}
+                            ${getLvHtml('FD', track.FD)}
+                            ${getLvHtml('OD', track.OD)}
+                            ${getLvHtml('UL', track.UL)}
+                        </div>
                     </div>
                 `;
                 container.appendChild(div);
