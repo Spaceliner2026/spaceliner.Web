@@ -120,6 +120,168 @@ const MUSIC_DATA = [
         FD: "16",
         OD: "22",
         UL: ""
+    },
+    {
+        title: "メリーさんの羊",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "4",
+        FD: "14",
+        OD: "21",
+        UL: ""
+    },
+    {
+        title: "$E=mc~2$",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "10",
+        FD: "21",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Divine Retribution",
+        artist: "カンキツ / ポッキー",
+        //楽曲Level
+        ST: "8",
+        FD: "20",
+        OD: "24",
+        UL: ""
+    },
+    {
+        title: "3.14",
+        artist: "ポッキー",
+        //楽曲Level
+        ST: "6",
+        FD: "18",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "思い出",
+        artist: "POLAN",
+        //楽曲Level
+        ST: "6",
+        FD: "11",
+        OD: "18",
+        UL: ""
+    },
+    {
+        title: "POINTbit",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "8",
+        FD: "17",
+        OD: "23",
+        UL: ""
+    },
+    {
+        title: "Incandescence",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "6",
+        FD: "21",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Block",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "3",
+        FD: "13",
+        OD: "22",
+        UL: ""
+    },
+    {
+        title: "メ、メ、メリークリスマス",
+        artist: "POLAN",
+        //楽曲Level
+        ST: "2",
+        FD: "14",
+        OD: "23",
+        UL: ""
+    },
+    {
+        title: "KENP",
+        artist: "カンキツ",
+        //楽曲Level
+        ST: "11",
+        FD: "21",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Suspirion",
+        artist: "DJ KorDai",
+        //楽曲Level
+        ST: "5",
+        FD: "21",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Synaplex",
+        artist: "DJ KorDai",
+        //楽曲Level
+        ST: "4",
+        FD: "21",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Swave (Spaceliner Edition)",
+        artist: "桜宮 凪",
+        //楽曲Level
+        ST: "2",
+        FD: "22",
+        OD: "26",
+        UL: ""
+    },
+    {
+        title: "Cross Crystal",
+        artist: "ナイト",
+        //楽曲Level
+        ST: "5",
+        FD: "16",
+        OD: "24",
+        UL: ""
+    },
+    {
+        title: "氷点",
+        artist: "Chikanya",
+        //楽曲Level
+        ST: "6",
+        FD: "15",
+        OD: "23",
+        UL: ""
+    },
+    {
+        title: "Ⅵ : Flamma(Spaceliner Ver.)",
+        artist: "Chikanya",
+        //楽曲Level
+        ST: "5",
+        FD: "19",
+        OD: "25",
+        UL: "26"
+    },
+    {
+        title: "Abyssal Altar",
+        artist: "R-oa",
+        //楽曲Level
+        ST: "7",
+        FD: "21",
+        OD: "24",
+        UL: "25"
+    },
+    {
+        title: "Abyssal Marionette",
+        artist: "R-oa",
+        //楽曲Level
+        ST: "5",
+        FD: "22",
+        OD: "25",
+        UL: "26"
     }
 ];
 
