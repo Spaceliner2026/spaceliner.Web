@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spaceliner | Official Site</title>
+    <link rel="icon" href="spaceliner_icon_1024.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
 </head>
@@ -47,31 +48,8 @@
 
         <section id="tracks">
             <h2 class="sl-title">TRACKLIST</h2>
-            <div class="track-container">
-                <div class="track-row side-l">
-                    <div class="track-cell">
-                        <span class="lv-label">Lv.1</span>
-                        <div class="track-text"><span class="title">メリーさんの羊</span><span class="artist">KANKITU Remix</span></div>
-                    </div>
-                </div>
-                <div class="track-row side-r">
-                    <div class="track-cell">
-                        <span class="lv-label">Lv.4</span>
-                        <div class="track-text"><span class="title">$E=mc^2$</span><span class="artist">Mathematical Beat</span></div>
-                    </div>
-                </div>
-                <div class="track-row side-l">
-                    <div class="track-cell">
-                        <span class="lv-label">Lv.5</span>
-                        <div class="track-text"><span class="title">Divine Retribution</span><span class="artist">High-Speed Chaos</span></div>
-                    </div>
-                </div>
-                <div class="track-row side-r">
-                    <div class="track-cell">
-                        <span class="lv-label">Lv.6</span>
-                        <div class="track-text"><span class="title">P0pL0ck</span><span class="artist">Digital Pulse</span></div>
-                    </div>
-                </div>
+            <div id="track-container" class="track-container">
+                <p class="loading">SYNCING DATA...</p>
             </div>
         </section>
 
@@ -120,6 +98,8 @@
 
     <script src="data.js"></script>
     <script>
+        
+        //Newsの呼び出し
         function renderNews() {
             const container = document.getElementById('news-container');
             if(!container || !NEWS_DATA) return;
@@ -135,7 +115,43 @@
                 container.appendChild(div);
             });
         }
+        
+        //Tracksの呼び出し
+        // Tracksの呼び出し
+        function renderTracks() {
+            const container = document.getElementById('track-container');
+            if(!container || !MUSIC_DATA) return;
+            container.innerHTML = '';
+
+            MUSIC_DATA.forEach((track, index) => {
+                const sideClass = (index % 2 === 0) ? 'side-l' : 'side-r';
+                const div = document.createElement('div');
+                div.className = `track-row ${sideClass}`;
+
+                // 各レベルが存在する場合のみ、HTML文字列を生成する補助関数
+                const getLvHtml = (label, value) => {
+                    if (!value || value === "") return ""; // データが空なら何も返さない
+                    return `<div class="${label}-label">Lv.${value}</div>`;
+                };
+                    
+                div.innerHTML = `
+                    <div class="track-cell">
+                        <div class="track-info">
+                            <span class="track-artist">${track.artist}</span>
+                            <span class="track-title">${track.title}</span>
+                        </div>
+                        ${getLvHtml('ST', track.ST)}
+                        ${getLvHtml('FD', track.FD)}
+                        ${getLvHtml('OD', track.OD)}
+                        ${getLvHtml('UL', track.UL)}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
         renderNews();
+        renderTracks();
     </script>
 </body>
 </html>
