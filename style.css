@@ -43,7 +43,7 @@ body {
 
 .grid-3d {
     position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
-    background-image: 
+    background-image:
         linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
     background-size: 80px 80px; transform: rotateX(65deg);
@@ -92,7 +92,7 @@ section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
     z-index: 1;
 }
 .hero-content { position: relative; z-index: 10; }
-.hero-icon { width: 120px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
+.hero-icon { width: 160px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
 h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; font-weight: 700; text-shadow: 4px 4px 0 var(--ui-gray); }
 .hero-tagline { font-size: 1rem; letter-spacing: 8px; opacity: 0.6; margin-top: 15px; text-transform: uppercase; }
 
@@ -123,9 +123,26 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 
 .track-cell { display: flex; align-items: center; gap: 20px; }
 .side-r .track-cell { justify-content: flex-end; }
-.lv-label { font-size: 1.5rem; font-weight: 900; color: var(--accent-red); font-style: italic; }
-.track-text .title { font-size: 1.6rem; font-weight: 700; display: block; line-height: 1.2; }
-.track-text .artist { font-size: 0.85rem; opacity: 0.6; }
+
+.ST-label { font-size: 1.5rem; font-weight: 900; color: #3dff3d; font-style: italic; }
+.FD-label { font-size: 1.5rem; font-weight: 900; color: #ffff3d; font-style: italic; }
+.OD-label { font-size: 1.5rem; font-weight: 900; color: var(--accent-red); font-style: italic; }
+.UL-label { font-size: 1.5rem; font-weight: 900; color: #9e3dff; font-style: italic; }
+
+/* ホバー時に各レベルの視認性を上げる設定 */
+.track-row:hover .ST-label { color: #008000; } /* 緑を少し濃く */
+.track-row:hover .FD-label { color: #8a8a00; } /* 黄色を濃い金系に */
+.track-row:hover .OD-label { color: #b30000; } /* 赤を濃い赤に */
+.track-row:hover .UL-label { color: #5a00b3; } /* 紫を濃い紫に */
+
+/* 文字に細い縁取りを入れる */
+.track-row:hover .track-cell [class*="-label"] {
+    text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+    transition: color 0.3s;
+}
+
+.track-title { font-size: 1.6rem; font-weight: 700; display: block; line-height: 1.2; }
+.track-artist { font-size: 0.85rem; opacity: 0.6; }
 
 /* --- FAQ & サポート (Support) --- */
 .faq-container { display: flex; flex-direction: column; gap: 20px; }
@@ -144,9 +161,9 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 .judge-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
 
 .dl-card { background: rgba(13,13,13,0.9); padding: 50px 30px; border: 1px solid var(--ui-mid); text-align: center; }
-.dl-button { 
-    display: inline-block; border: 2px solid var(--accent-blue); color: var(--accent-blue); 
-    padding: 18px 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; 
+.dl-button {
+    display: inline-block; border: 2px solid var(--accent-blue); color: var(--accent-blue);
+    padding: 18px 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem;
     margin-bottom: 40px; transition: 0.3s; letter-spacing: 2px;
 }
 .dl-button:hover { background: var(--accent-blue); color: #000; box-shadow: 0 0 25px var(--accent-blue); }
