@@ -92,6 +92,37 @@ const NEWS_DATA = [
     }
 ];
 
+// 楽曲リスト (Music Cross)
+const MUSIC_DATA = [
+    {
+        title: "眠りにつく前にGS",
+        artist: "POLAN",
+        //楽曲Level
+        ST: "2",
+        FD: "12",
+        OD: "20",
+        UL: ""
+    },
+    {
+        title: "Re.Mjoete",
+        artist: "カンキツ / POLAN",
+        //楽曲Level
+        ST: "5",
+        FD: "15",
+        OD: "23",
+        UL: ""
+    },
+    {
+        title: "P0pP0pL0ck",
+        artist: "POLAN",
+        //楽曲Level
+        ST: "7",
+        FD: "16",
+        OD: "22",
+        UL: ""
+    }
+];
+
 // FAQデータ (support.html用)
 const FAQ_DATA = [
     {
