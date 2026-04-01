@@ -145,6 +145,79 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
     font-size: 0.8rem;
 }
 
+/* フィルターエリアのレイアウト */
+.filter-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-item {
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter-item input {
+    display: none; /* デフォルトのチェックボックスは隠す */
+}
+
+/* ラベルの見た目（ボタン風） */
+.filter-label {
+    display: inline-block;
+    padding: 5px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.75rem;
+    font-weight: bold;
+    transition: 0.3s;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* チェックが入っている時の状態 */
+.filter-item input:checked + .filter-label {
+    background: var(--ui-light);
+    color: #000;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* 難易度別のホバー/選択時カラー */
+.filter-item input:checked + .st-color { border-color: #00ffcc; color: #00ffcc; background: rgba(0, 255, 204, 0.1); }
+.filter-item input:checked + .fd-color { border-color: #ffff00; color: #ffff00; background: rgba(255, 255, 0, 0.1); }
+.filter-item input:checked + .od-color { border-color: #ff0066; color: #ff0066; background: rgba(255, 0, 102, 0.1); }
+.filter-item input:checked + .ul-color { border-color: #aa00ff; color: #aa00ff; background: rgba(170, 0, 255, 0.1); }
+
+/*Levelソート UI*/
+.level-range-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+    color: var(--ui-light);
+    font-size: 0.8rem;
+}
+
+.level-range-filter input {
+    width: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--ui-mid);
+    color: var(--accent-blue);
+    padding: 4px 8px;
+    text-align: center;
+    font-family: var(--font-main);
+    outline: none;
+}
+
+.level-range-filter input::-webkit-inner-spin-button,
+.level-range-filter input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.level-range-filter input:focus {
+    border-color: var(--accent-blue);
+    background: rgba(0, 210, 255, 0.1);
+}
+
 /* --- 楽曲リスト (Music Cross UI) --- */
 .track-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: 565px; overflow-y: auto; padding-right: 10px; }
 .track-container { display: flex; flex-direction: column; gap: 4px; }
