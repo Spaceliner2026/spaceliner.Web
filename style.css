@@ -111,7 +111,42 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 }
 .news-link:hover { background: var(--accent-blue); transform: scale(1.05); }
 
+/* 検索バーのコンテナ */
+.search-container {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* 入力欄のデザイン */
+#track-search {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-left: 4px solid var(--accent-blue); /* 青のアクセント */
+    padding: 12px 20px;
+    color: var(--ui-light);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    outline: none;
+    transition: 0.3s;
+}
+
+#track-search:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--accent-red); /* フォーカス時は赤に */
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+}
+
+/* プレースホルダーの色 */
+#track-search::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+}
+
 /* --- 楽曲リスト (Music Cross UI) --- */
+.track-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: 565px; overflow-y: auto; padding-right: 10px; }
 .track-container { display: flex; flex-direction: column; gap: 4px; }
 .track-row { position: relative; padding: 20px 40px; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); cursor: pointer; text-decoration: none; color: inherit; }
 
