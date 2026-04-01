@@ -48,8 +48,13 @@
 
         <section id="tracks">
             <h2 class="sl-title">TRACKLIST</h2>
-            <div id="track-container" class="track-container">
-                <p class="loading">SYNCING DATA...</p>
+            <div class="search-container">
+                <input type="text" id="track-search" placeholder="SEARCH TRACK OR ARTIST..." oninput="filterTracks()">
+            </div>
+            <div class="track-scroll-area">
+                <div id="track-container" class="track-container">
+                    <p class="loading">SYNCING DATA...</p>
+                </div>
             </div>
         </section>
 
@@ -116,24 +121,40 @@
             });
         }
         
-        //Tracksの呼び出し
-        // Tracksの呼び出し
-        function renderTracks() {
+        // 検索フィルタリング用の関数
+        function filterTracks() {
+            const keyword = document.getElementById('track-search').value.toLowerCase();
+            renderTracks(keyword);
+        }
+
+        // Tracksの呼び出し（引数で検索ワードを受け取るよう修正）
+        function renderTracks(searchKeyword = "") {
             const container = document.getElementById('track-container');
-            if(!container || !MUSIC_DATA) return;
+           if(!container || !MUSIC_DATA) return;
             container.innerHTML = '';
 
-            MUSIC_DATA.forEach((track, index) => {
+            // 検索ワードでフィルタリング
+            const filteredData = MUSIC_DATA.filter(track => {
+                const title = track.title.toLowerCase();
+                const artist = track.artist.toLowerCase();
+                return title.includes(searchKeyword) || artist.includes(searchKeyword);
+            });
+
+            if (filteredData.length === 0) {
+                container.innerHTML = '<p class="loading">NO TRACKS FOUND</p>';
+                return;
+            }
+
+            filteredData.forEach((track, index) => {
                 const sideClass = (index % 2 === 0) ? 'side-l' : 'side-r';
                 const div = document.createElement('div');
                 div.className = `track-row ${sideClass}`;
 
-                // 各レベルが存在する場合のみ、HTML文字列を生成する補助関数
                 const getLvHtml = (label, value) => {
-                    if (!value || value === "") return ""; // データが空なら何も返さない
+                    if (!value || value === "") return "";
                     return `<div class="${label}-label">Lv.${value}</div>`;
                 };
-                    
+            
                 div.innerHTML = `
                     <div class="track-cell">
                         <div class="track-info">
