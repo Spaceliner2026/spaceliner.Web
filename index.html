@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="loader" class="boot-overlay">
+            <div class="boot-text">SYSTEM LOADING...</div>
+    </div>
 
     <div class="bg-container">
         <div class="scanlines"></div>
@@ -231,7 +234,21 @@
         window.onload = function() {
             renderNews();
             // 初期状態（空検索、全難易度、Lv0〜99）で呼び出し
-            renderTracks("", ["ST", "FD", "OD", "UL"], 0, 99); 
+            renderTracks("", ["ST", "FD", "OD", "UL"], 0, 99);
+            
+            // --- 追加：アニメーション制御 ---
+            const loader = document.getElementById('loader');
+                
+            // 1.5秒間「INITIALIZING...」を見せてからフェードアウト
+            setTimeout(() => {
+                loader.classList.add('is-finished');
+                document.body.classList.add('is-loaded');
+                    
+                // アニメーションが終わったらDOMから削除（メモリ節約）
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800);
+            }, 1000);
         };
 
         function renderTracks(searchKeyword = "", selectedLevels = [], minLv = 0, maxLv = 99) {
