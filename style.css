@@ -24,6 +24,71 @@ body {
     line-height: 1.6;
 }
 
+/* --- 起動アニメーション用の設定 --- */
+
+/* 1. 初期状態：メインコンテンツを隠しておく */
+main, .side-nav {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* 2. 起動完了時のクラス */
+body.is-loaded main {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.is-loaded .side-nav {
+    opacity: 1;
+}
+
+/* 3. 画面全体を覆うグリッチ・ブート画面 */
+.boot-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-black);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* クリックを阻害しない */
+    transition: opacity 0.8s ease;
+}
+
+/* 読み込み中のテキストアニメーション */
+.boot-text {
+    font-family: monospace;
+    color: var(--accent-blue);
+    font-size: 1rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--accent-blue);
+    width: 0;
+    animation: typing 0.5s steps(20, end) forwards, blink 0.5s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 250px; }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--accent-blue); }
+}
+
+/* フェードアウト用 */
+.boot-overlay.is-finished {
+    opacity: 0;
+}
+
 /* --- 背景演出 (Background Effects) --- */
 .bg-container {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -33,7 +98,7 @@ body {
 
 .cross-line-l, .cross-line-r {
     position: absolute; width: 200%; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     top: 50%; left: -50%; pointer-events: none;
 }
 .cross-line-l { transform: rotate(25deg); animation: bg-pulse 10s infinite alternate; }
@@ -44,8 +109,8 @@ body {
 .grid-3d {
     position: absolute; width: 200%; height: 200%; top: -50%; left: -50%;
     background-image:
-        linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255,255,255,0.075) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
     background-size: 80px 80px; transform: rotateX(65deg);
     animation: grid-move 5s linear infinite;
 }
