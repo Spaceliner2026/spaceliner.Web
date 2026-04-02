@@ -111,6 +111,113 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 }
 .news-link:hover { background: var(--accent-blue); transform: scale(1.05); }
 
+/* PC表示: HOW TO PLAYとSYSTEMの横並びのレイアウト */
+.top-panels-container {
+    display: flex;
+    gap: 30px; /* パネル間の余白 */
+    margin-bottom: 40px;
+    align-items: flex-start; /* 高さを自動に合わせる */
+}
+
+/* 各パネルの基本スタイル */
+.info-panel {
+    flex: 1; /* 1:1の幅で広がる */
+    min-width: 0; /* Flexbox内での崩れ防止 */
+}
+
+.how-to-container, .system-container {
+    background: none;
+    border: none;
+    padding: 0;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* スマホ表示: 縦並びに戻す */
+@media (max-width: 900px) {
+    .top-panels-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .how-to-container, .system-container {
+        height: auto; /* スマホではコンテンツに合わせて広がる */
+    }
+}
+
+/* 操作説明全体のレイアウト調整 */
+.control-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 行間の隙間 */
+}
+
+/* 4つのキーを横に並べる */
+.key-row-top {
+    display: flex;
+    gap: 15px;
+}
+
+/* セパレーター（+）の調整 */
+.key-row-mid {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key-separator {
+    font-size: 1.5rem;
+    color: var(--accent-blue);
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+/* スペースキーの行 */
+.key-row-bottom {
+    display: flex;
+    justify-content: center;
+}
+
+/* キーの基本デザイン（再掲・調整） */
+.kb-key {
+    width: 55px;
+    height: 55px;
+    background: var(--ui-gray);
+    border: 2px solid var(--ui-mid);
+    border-bottom: 5px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--ui-light);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* スペースキーの横幅を広めに設定 */
+.space-key {
+    width: 220px; /* 4つのキーの幅に合わせるとバランスが良い */
+    background: linear-gradient(180deg, var(--ui-gray), #000);
+    border-color: var(--accent-blue);
+}
+
+/* スマホでの表示（キーがはみ出さないように縮小） */
+@media (max-width: 600px) {
+    .kb-key {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    .space-key {
+        width: 180px;
+    }
+}
+
 /* 検索バーのコンテナ */
 .search-container {
     margin-bottom: 20px;
@@ -160,6 +267,31 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 
 .filter-item input {
     display: none; /* デフォルトのチェックボックスは隠す */
+}
+
+/* フィルターセクションの見出しラベル */
+.filter-header {
+    font-size: 0.7rem;
+    color: var(--accent-blue);
+    background: rgba(0, 210, 255, 0.1);
+    padding: 2px 10px;
+    margin-right: 5px;
+    border-left: 3px solid var(--accent-blue);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: skewX(-15deg); /* タイトルと合わせた傾斜 */
+}
+
+/* モバイル表示時の調整 */
+@media (max-width: 800px) {
+    .filter-header {
+        width: 100%; /* スマホではラベルを独立した行にする */
+        margin-bottom: 5px;
+        margin-left: 0 !important;
+    }
 }
 
 /* ラベルの見た目（ボタン風） */
@@ -232,10 +364,14 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
 .track-cell { display: flex; align-items: center; gap: 20px; }
 .side-r .track-cell { justify-content: flex-end; }
 
-.ST-label { font-size: 1.5rem; font-weight: 900; color: #3dff3d; font-style: italic; }
-.FD-label { font-size: 1.5rem; font-weight: 900; color: #ffff3d; font-style: italic; }
-.OD-label { font-size: 1.5rem; font-weight: 900; color: var(--accent-red); font-style: italic; }
-.UL-label { font-size: 1.5rem; font-weight: 900; color: #9e3dff; font-style: italic; }
+.track-levels {
+    display: flex;
+}
+
+.ST-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #3dff3d; font-style: italic; }
+.FD-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #ffff3d; font-style: italic; }
+.OD-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: var(--accent-red); font-style: italic; }
+.UL-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #9e3dff; font-style: italic; }
 
 /* ホバー時に各レベルの視認性を上げる設定 */
 .track-row:hover .ST-label { color: #008000; } /* 緑を少し濃く */
