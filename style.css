@@ -161,20 +161,104 @@ section { padding: 80px 10%; max-width: 1400px; margin: 0 auto; }
 h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; font-weight: 700; text-shadow: 4px 4px 0 var(--ui-gray); }
 .hero-tagline { font-size: 1rem; letter-spacing: 8px; opacity: 0.6; margin-top: 15px; text-transform: uppercase; }
 
-/* --- ニュース (News) --- */
-.news-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: 500px; overflow-y: auto; padding-right: 10px; }
-.news-item { background: rgba(255,255,255,0.03); padding: 25px; border-left: 3px solid var(--ui-mid); transition: 0.3s; }
-.news-item:hover { background: rgba(255,255,255,0.07); border-left-color: var(--accent-blue); transform: translateX(5px); }
-.news-meta { margin-bottom: 10px; }
-.news-date { color: var(--accent-blue); font-family: monospace; font-weight: bold; margin-right: 15px; }
-.news-headline { font-size: 1.2rem; margin: 0; display: inline; }
-.news-body { font-size: 0.95rem; opacity: 0.7; margin: 15px 0; white-space: normal; }
-.news-link {
-    display: inline-block; background: var(--ui-light); color: #000;
-    padding: 6px 20px; text-decoration: none; font-size: 0.75rem; font-weight: bold;
-    clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%); transition: 0.3s;
+/* --- ニュース (News) 改訂版 --- */
+.news-scroll-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
-.news-link:hover { background: var(--accent-blue); transform: scale(1.05); }
+
+.news-item {
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid var(--ui-mid);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.news-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-left-color: var(--accent-blue);
+}
+
+.news-item.is-active {
+    background: rgba(255,255,255,0.1);
+    border-left-color: var(--accent-red);
+}
+
+.news-header {
+    padding: 20px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* タイトルとアイコンを両端に */
+}
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.news-date {
+    color: var(--accent-blue);
+    font-family: monospace;
+    font-weight: bold;
+    margin-right: 20px;
+    min-width: 100px;
+}
+
+.news-headline {
+    font-size: 1.1rem;
+    margin: 0;
+    flex: 1;
+}
+
+.news-icon {
+    font-size: 1.2rem;
+    color: var(--accent-blue);
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+/* 折りたたみコンテンツの制御 */
+.news-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); /* スムーズな開閉アニメーション */
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.news-content.is-open {
+    max-height: 1000px; /* 十分な高さを確保 */
+    transition: max-height 0.6s ease-in;
+}
+
+.news-body-inner {
+    padding: 0 25px 30px 25px; /* 上は0にしてヘッダーとの間隔を調整 */
+}
+
+.news-body {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin: 15px 0;
+    line-height: 1.8;
+}
+
+/* モバイル調整 */
+@media (max-width: 600px) {
+    .news-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .news-icon {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+    }
+}
 
 /* PC表示: HOW TO PLAYとSYSTEMの横並びのレイアウト */
 .top-panels-container {
