@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="_KMajbnJ4Vms5pa0WgsNROOZJy49E9UuADMhf4TitmY" />
     <title>Spaceliner | Official Site</title>
     <link rel="icon" href="spaceliner_icon_1024.png" type="image/png">
     <link rel="stylesheet" href="style.css">
@@ -198,21 +197,52 @@
     <script src="data.js"></script>
     <script>
         
-        //Newsの呼び出し
+        // Newsの呼び出し（アコーディオン形式）
         function renderNews() {
             const container = document.getElementById('news-container');
             if(!container || !NEWS_DATA) return;
             container.innerHTML = '';
-            NEWS_DATA.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'news-item';
-                const body = item.body.replace(/\n/g, '<br>');
-                let link = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
-                div.innerHTML = `
-                    <div class="news-meta"><span class="news-date">${item.date}</span><h3 class="news-headline">${item.title}</h3></div>
-                    <div class="news-body">${body}</div>${link}`;
-                container.appendChild(div);
+            
+            NEWS_DATA.forEach((item, index) => {
+                const article = document.createElement('article');
+                article.className = 'news-item accordion-item';
+                
+                // 改行コードをHTMLタグに変換
+                const bodyText = item.body.replace(/\n/g, '<br>');
+                const linkHtml = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
+
+                article.innerHTML = `
+                    <div class="news-header" onclick="toggleNews(${index})">
+                        <span class="news-date">${item.date}</span>
+                        <h3 class="news-headline">${item.title}</h3>
+                        <span class="news-icon">＋</span>
+                    </div>
+                    <div id="news-content-${index}" class="news-content">
+                        <div class="news-body-inner">
+                            <div class="news-body">${bodyText}</div>
+                            ${linkHtml}
+                        </div>
+                    </div>`;
+                container.appendChild(article);
             });
+        }
+
+        // 開閉用関数
+        function toggleNews(index) {
+            const content = document.getElementById(`news-content-${index}`);
+            const item = content.parentElement;
+            
+            // 他のニュースを閉じたい場合はこれを有効化したらいいよ~
+            // document.querySelectorAll('.news-content').forEach(el => {
+            //    if(el.id !== `news-content-${index}`) el.classList.remove('is-open');
+            // });
+
+            content.classList.toggle('is-open');
+            item.classList.toggle('is-active');
+            
+            // アイコンの切り替え
+            const icon = item.querySelector('.news-icon');
+            icon.textContent = content.classList.contains('is-open') ? '－' : '＋';
         }
         
         // 検索フィルタリング用の関数
