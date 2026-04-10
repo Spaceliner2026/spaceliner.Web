@@ -340,6 +340,25 @@ const BUG_CATEGORIES = [
     }
 ];
 
+const BOARD_DATA = [
+    {
+        data: "2026/04/10",
+        category: "MEETING",
+        author: "Kankitsu",
+        title: "第15回 全体進捗報告",
+        main: "・Spaceliner Ver 1.2に向けた新譜面の進捗確認\n・サーバー負荷テストの結果共有\n・UIアニメーションの微調整について",
+        tag: "Critical"
+    },
+    {
+        data: "2026/04/08",
+        category: "TECH",
+        author: "Dev-Lead",
+        title: "Addressablesの最適化結果",
+        main: "アセットのロード時間を計測し、従来比で15%の高速化を確認しました。リソースの切り出しルールを変更します。",
+        tag: "System"
+    }
+];
+
 
 
 
