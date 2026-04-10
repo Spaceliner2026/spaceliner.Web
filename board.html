@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Board | Spaceliner Project</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        .board-container { max-width: 1000px; margin: 80px auto; padding: 20px; }
+        
+        /* 一覧のカードスタイル */
+        .report-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .report-card {
+            background: rgba(26, 26, 26, 0.8);
+            border: 1px solid var(--ui-mid);
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .report-card:hover { border-color: var(--accent-blue); background: rgba(0, 210, 255, 0.05); }
+
+        /* 全画面詳細オーバーレイ */
+        #detail-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--bg-black);
+            z-index: 1000;
+            display: none; /* 初期状態は非表示 */
+            overflow-y: auto;
+            padding: 60px 10%;
+        }
+
+        /* 詳細画面内のコンテンツ配置 */
+        .detail-window { max-width: 800px; margin: 0 auto; }
+        .close-btn {
+            position: fixed;
+            top: 20px; right: 40px;
+            font-family: 'Exo 2';
+            color: var(--accent-blue);
+            cursor: pointer;
+            font-size: 1.2rem;
+            border: 1px solid var(--accent-blue);
+            padding: 5px 15px;
+        }
+        .detail-header { border-bottom: 2px solid var(--accent-blue); margin-bottom: 30px; padding-bottom: 20px; }
+        .detail-body { 
+            line-height: 2; 
+            font-size: 1rem; 
+            color: #ddd; 
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body class="is-loaded">
+    <div class="bg-container"><div class="scanlines"></div></div>
+
+    <main class="board-container" id="main-view">
+        <header style="margin-bottom: 40px;">
+            <h1 style="letter-spacing: 4px; border-left: 5px solid var(--accent-blue); padding-left: 15px;">MANAGEMENT BOARD</h1>
+        </header>
+        <div id="report-grid" class="report-grid"></div>
+    </main>
+
+    <div id="detail-overlay">
+        <div class="close-btn" onclick="closeDetail()">× CLOSE</div>
+        <div class="detail-window">
+            <div id="detail-content">
+                </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script>
+        function renderBoard() {
+            const container = document.getElementById('report-grid');
+            if (typeof BOARD_DATA === 'undefined') return;
+
+            BOARD_DATA.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'report-card';
+                card.onclick = () => openDetail(index);
+                card.innerHTML = `
+                    <div style="font-size:0.7rem; color:var(--accent-blue);">${item.data} [${item.category}]</div>
+                    <h3 style="margin:10px 0;">${item.title}</h3>
+                    <div style="font-size:0.8rem; opacity:0.6;">Author: ${item.author}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function openDetail(index) {
+            const data = BOARD_DATA[index];
+            const content = document.getElementById('detail-content');
+            
+            content.innerHTML = `
+                <div class="detail-header">
+                    <div style="color:var(--accent-blue); font-family:'Exo 2'; margin-bottom:10px;">
+                        ${data.data} / ${data.category} / #${data.tag}
+                    </div>
+                    <h1 style="font-size: 2rem;">${data.title}</h1>
+                    <p style="opacity:0.7;">Reporter: ${data.author}</p>
+                </div>
+                <div class="detail-body">${data.main}</div>
+            `;
+
+            document.getElementById('detail-overlay').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 背景スクロール禁止
+        }
+
+        function closeDetail() {
+            document.getElementById('detail-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto'; // スクロール再開
+        }
+
+        window.onload = renderBoard;
+    </script>
+</body>
+</html>
