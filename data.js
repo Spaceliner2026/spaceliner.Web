@@ -336,6 +336,42 @@ const MUSIC_DATA = [
         FD: "22",
         OD: "25",
         UL: "26"
+    },
+    {
+        title: "ユメミノヒ",
+        artist: "とし123456789 feat.初音ミク",
+        //楽曲Level
+        ST: "9",
+        FD: "",
+        OD: "",
+        UL: ""
+    },
+    {
+        title: "Ethereal",
+        artist: "DJ Chiyo",
+        //楽曲Level
+        ST: "13",
+        FD: "",
+        OD: "",
+        UL: ""
+    },
+    {
+        title: "CrymsoniA",
+        artist: "DJ KorDai",
+        //楽曲Level
+        ST: "11",
+        FD: "",
+        OD: "",
+        UL: ""
+    },
+    {
+        title: "OOPARTS OVERDRIVE",
+        artist: "DJ KorDai",
+        //楽曲Level
+        ST: "7",
+        FD: "",
+        OD: "",
+        UL: ""
     }
 ];
 
