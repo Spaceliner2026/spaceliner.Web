@@ -191,7 +191,10 @@
     </main>
 
     <footer>
-        <small>&copy; 2025 PROJECT SPACELINER. All rights reserved.</small>
+        <small>&copy; 2025-<span id="current-year"></span> PROJECT SPACELINER. All rights reserved.</small>
+        <script>
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        </script>
     </footer>
 
     <script src="data.js"></script>
