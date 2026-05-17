@@ -94,40 +94,11 @@
         
         <section id="tracks">
             <h2 class="sl-title">TRACKLIST</h2>
-            <div class="search-container">
-                <input type="text" id="track-search" placeholder="SEARCH TRACK OR ARTIST..." oninput="filterTracks()">
-                <div class="filter-group">
-                    <div class="filter-header">Difficulty sort</div>
-                    <label class="filter-item">
-                        <input type="checkbox" value="ST" checked onchange="filterTracks()">
-                        <span class="filter-label st-color">STANDARD</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="FD" checked onchange="filterTracks()">
-                        <span class="filter-label fd-color">FULL DRIVE</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="OD" checked onchange="filterTracks()">
-                        <span class="filter-label od-color">OVERDRIVE</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="UL" checked onchange="filterTracks()">
-                        <span class="filter-label ul-color">UNLIMITED</span>
-                    </label>
-                    <div class="filter-header" style="margin-left: 10px;">Level sort</div>
-                    <div class="level-range-filter">
-                        <span>Lv.</span>
-                        <input type="number" id="lv-min" min="1" max="30" placeholder="MIN" oninput="filterTracks()">
-                        <span>〜</span>
-                        <input type="number" id="lv-max" min="1" max="30" placeholder="MAX" oninput="filterTracks()">
-                    </div>
-                </div>
+            
+            <div class="news-more-btn-area" style="margin-top: 0; margin-bottom: 40px;">
+                <a href="music.html" class="news-more-button">VIEW ALL TRACKS // 楽曲一覧を見る</a>
             </div>
-            <div class="track-scroll-area">
-                <div id="track-container" class="track-container">
-                    <p class="loading">SYNCING DATA...</p>
-                </div>
-            </div>
+
         </section>
 
         <section id="connect">
