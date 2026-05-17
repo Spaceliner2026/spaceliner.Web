@@ -342,8 +342,8 @@ const MUSIC_DATA = [
         artist: "とし123456789 feat.初音ミク",
         //楽曲Level
         ST: "9",
-        FD: "",
-        OD: "",
+        FD: "18",
+        OD: "26",
         UL: ""
     },
     {
@@ -351,8 +351,8 @@ const MUSIC_DATA = [
         artist: "DJ Chiyo",
         //楽曲Level
         ST: "13",
-        FD: "",
-        OD: "",
+        FD: "22",
+        OD: "27",
         UL: ""
     },
     {
@@ -360,8 +360,8 @@ const MUSIC_DATA = [
         artist: "DJ KorDai",
         //楽曲Level
         ST: "11",
-        FD: "",
-        OD: "",
+        FD: "19",
+        OD: "25",
         UL: ""
     },
     {
@@ -369,8 +369,8 @@ const MUSIC_DATA = [
         artist: "DJ KorDai",
         //楽曲Level
         ST: "7",
-        FD: "",
-        OD: "",
+        FD: "20",
+        OD: "24",
         UL: ""
     }
 ];
