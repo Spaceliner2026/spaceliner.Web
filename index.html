@@ -50,7 +50,7 @@
             </div>
         </section>
 
-        <div class="top-panels-container" class="info-panel">
+        <div class="top-panels-container">
             <section id="how-to-play">
                 <h2 class="sl-title">HOW</h2>
                 <div class="how-to-container">
@@ -200,35 +200,46 @@
     <script src="data.js"></script>
     <script>
         
-        // Newsの呼び出し（アコーディオン形式）
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            if(!container || !NEWS_DATA) return;
-            container.innerHTML = '';
-            
-            NEWS_DATA.forEach((item, index) => {
-                const article = document.createElement('article');
-                article.className = 'news-item accordion-item';
-                
-                // 改行コードをHTMLタグに変換
-                const bodyText = item.body.replace(/\n/g, '<br>');
-                const linkHtml = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
+    // Newsの呼び出し（最新3件のみ初期表示）
+    function renderNews() {
+        const container = document.getElementById('news-container');
+        if(!container || !NEWS_DATA) return;
+        container.innerHTML = '';
+    
+        // 最初の3件だけを取り出す
+        const displayData = NEWS_DATA.slice(0, 3);
+    
+        displayData.forEach((item, index) => {
+            const article = document.createElement('article');
+            article.className = 'news-item accordion-item';
+        
+            const bodyText = item.body.replace(/\n/g, '<br>');
+            const linkHtml = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
 
-                article.innerHTML = `
-                    <div class="news-header" onclick="toggleNews(${index})">
-                        <span class="news-date">${item.date}</span>
-                        <h3 class="news-headline">${item.title}</h3>
-                        <span class="news-icon">＋</span>
+            // 💡 階層を整理し、日付・タイトル・＋ボタンを一つのheaderにまとめました
+            article.innerHTML = `
+                <div class="news-header" onclick="toggleNews(${index})">
+                    <span class="news-date">${item.date}</span>
+                    <h3 class="news-headline">${item.title}</h3>
+                    <span class="news-icon">＋</span>
+                </div>
+                <div id="news-content-${index}" class="news-content">
+                    <div class="news-body-inner">
+                        <div class="news-body">${bodyText}</div>
+                        ${linkHtml}
                     </div>
-                    <div id="news-content-${index}" class="news-content">
-                        <div class="news-body-inner">
-                            <div class="news-body">${bodyText}</div>
-                            ${linkHtml}
-                        </div>
-                    </div>`;
-                container.appendChild(article);
-            });
-        }
+                </div>`;
+            container.appendChild(article);
+        });
+
+        // 3件の下に「NEWS一覧」のボタンを追加
+        const btnContainer = document.createElement('div');
+        btnContainer.className = 'news-more-btn-area';
+        btnContainer.innerHTML = `
+            <a href="board.html" class="news-more-button">MORE NEWS // 一覧を見る</a>
+        `;
+        container.appendChild(btnContainer);
+    }
 
         // 開閉用関数
         function toggleNews(index) {
