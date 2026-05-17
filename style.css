@@ -172,6 +172,7 @@ h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); letter-spacing: 15px; margin: 0; fon
     border-left: 3px solid var(--ui-mid);
     transition: 0.3s;
     cursor: pointer;
+    position: relative;
 }
 
 .news-item:hover {
@@ -508,3 +509,87 @@ footer { padding: 80px 0; text-align: center; font-size: 0.6rem; letter-spacing:
 
 .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
 .tag-item { font-size: 0.65rem; color: var(--accent-blue); background: rgba(0, 210, 255, 0.1); border: 1px solid rgba(0, 210, 255, 0.3); padding: 2px 8px; }
+
+/* =========================================
+   モバイル・スマホ最適化（上書き・追加）
+   ========================================= */
+
+@media (max-width: 800px) {
+    /* 1. 楽曲リストのホバー・タップ時のガタつき・ズレを完全に抑え込む */
+    .track-row {
+        margin: 0 0 10px 0 !important;
+        clip-path: none !important;
+        transform: none !important;
+        padding: 15px 20px !important;
+        background: var(--ui-gray) !important; /* グラデーションから単色にして見やすく */
+        border: 1px solid var(--ui-mid);
+        border-radius: 4px;
+    }
+
+    /* スマホではホバーアニメーションを無効化（横揺れを防止） */
+    .side-l:hover, .side-r:hover {
+        transform: none !important;
+        background: var(--ui-gray) !important;
+        color: var(--ui-light) !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    /* セル内の配置をスマホ用に最適化 */
+    .track-cell {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+    .side-r .track-cell {
+        text-align: left;
+    }
+
+    .track-title {
+        font-size: 1.3rem; /* 文字サイズを少しスマホ向けに小さく */
+    }
+
+    /* 2. スクールトラップ対策：スマホではリストを固定高にせず全表示（または高さを広げる） */
+    .track-scroll-area {
+        max-height: none !important; 
+        overflow-y: visible !important;
+        padding-right: 0;
+    }
+
+    /* 3. 難易度・レベルソートの余白調整 */
+    .filter-group {
+        gap: 8px 5px; /* 縦方向の隙間をしっかり確保 */
+    }
+    .filter-header {
+        margin-bottom: 5px;
+        transform: none; /* スマホでは斜めを戻して文字を読みやすく */
+    }
+    .level-range-filter {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 4. 極小画面（iPhone SEなど）でのキーボード配置の崩れ防止 */
+    .how-to-container {
+        padding: 20px 10px;
+    }
+    .key-row-top {
+        gap: 8px;
+    }
+    .kb-key {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    .space-key {
+        width: 150px;
+    }
+    
+    /* ニュースの文字サイズ微調整 */
+    .news-headline {
+        font-size: 1rem;
+    }
+}
