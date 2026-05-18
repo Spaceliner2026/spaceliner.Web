@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWS ARCHIVE | Spaceliner Official</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        /* news.html 固有の微調整用スタイル */
+        .news-archive-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        #news-archive-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        /* 1件ずつの余白調整 */
+        .news-item {
+            border-left: 3px solid var(--ui-mid);
+            background: rgba(26, 26, 26, 0.6);
+        }
+    </style>
+</head>
+<body class="is-loaded">
+
+    <div class="bg-container">
+        <div class="grid-3d"></div>
+        <div class="scanlines"></div>
+    </div>
+
+    <nav class="side-nav">
+        <ul>
+            <li><a href="index.html">TOP</a></li>
+            <li><a href="#news-list-section">NEWS LIST</a></li>
+        </ul>
+    </nav>
+
+    <header class="support-hero">
+        <div class="hero-content">
+            <h1>NEWS ARCHIVE</h1>
+            <p>INFORMATION LOG TERMINAL</p>
+        </div>
+    </header>
+
+    <main class="news-archive-container">
+        <section id="news-list-section" style="padding-top: 0;">
+            <h2 class="sl-title">ALL SIGNAL LOGS</h2>
+            
+            <div id="news-archive-list">
+                <p class="loading">SYNCING DATA...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <small>&copy; 2025-2026 PROJECT SPACELINER. All rights reserved.</small>
+    </footer>
+
+    <script src="data.js"></script>
+    <script>
+        function renderAllNews() {
+            const container = document.getElementById('news-archive-list');
+            if (!container || typeof NEWS_DATA === 'undefined') return;
+            
+            container.innerHTML = '';
+
+            // data.js の NEWS_DATA をすべてループで回して出力
+            NEWS_DATA.forEach((item, index) => {
+                const article = document.createElement('article');
+                article.className = 'news-item accordion-item';
+            
+                // 本文の改行コードをブラウザ用に<br>に変換
+                const bodyText = item.body.replace(/\n/g, '<br>');
+                // リンクがある場合のみ詳細ボタンを表示
+                const linkHtml = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank" style="margin-top:15px;">VIEW DETAILS</a>` : '';
+
+                article.innerHTML = `
+                    <div class="news-header" onclick="toggleNews(${index})">
+                        <div class="news-meta">
+                            <span class="news-date">${item.date}</span>
+                            <h3 class="news-headline">${item.title}</h3>
+                        </div>
+                        <span class="news-icon">＋</span>
+                    </div>
+                    <div id="news-content-${index}" class="news-content">
+                        <div class="news-body-inner">
+                            <div class="news-body">${bodyText}</div>
+                            ${linkHtml}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(article);
+            });
+        }
+
+        // アコーディオンの開閉システム（index.htmlのロジックと統一）
+        function toggleNews(index) {
+            const content = document.getElementById(`news-content-${index}`);
+            const item = content.parentElement;
+            
+            content.classList.toggle('is-open');
+            item.classList.toggle('is-active');
+            
+            const icon = item.querySelector('.news-icon');
+            icon.textContent = content.classList.contains('is-open') ? '－' : '＋';
+        }
+
+        // ページ読み込み完了時に実行
+        window.onload = function() {
+            renderAllNews();
+            // システムロード完了のトリガー（style.cssのアニメーション連動用）
+            document.body.classList.add('is-loaded');
+        };
+    </script>
+</body>
+</html>
