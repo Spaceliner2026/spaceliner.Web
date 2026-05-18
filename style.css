@@ -603,3 +603,156 @@ body.is-loaded main {
         font-size: 1rem;
     }
 }
+
+
+/* --- 楽曲リスト (Music Cross UI) --- */
+.search-container { margin-bottom: 20px; width: 100%; max-width: 600px; }
+#track-search {
+    width: 100%; background: rgba(255, 255, 255, 0.05); border: none;
+    border-left: 4px solid var(--accent-blue); padding: 12px 20px;
+    color: var(--ui-light); font-family: var(--font-main); font-size: 1rem;
+    letter-spacing: 2px; outline: none; transition: 0.3s;
+}
+#track-search:focus { background: rgba(255, 255, 255, 0.1); border-left-color: var(--accent-red); box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+#track-search::placeholder { color: rgba(255, 255, 255, 0.3); font-size: 0.8rem; }
+
+.filter-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+.filter-item { cursor: pointer; user-select: none; }
+.filter-item input { display: none; }
+
+.filter-header {
+    font-size: 0.7rem; color: var(--accent-blue); background: rgba(0, 210, 255, 0.1);
+    padding: 2px 10px; margin-right: 5px; border-left: 3px solid var(--accent-blue);
+    display: flex; align-items: center; font-weight: bold; letter-spacing: 1px;
+    text-transform: uppercase; transform: skewX(-15deg);
+}
+
+@media (max-width: 800px) {
+    .filter-header { width: 100%; margin-bottom: 5px; margin-left: 0 !important; }
+}
+
+.filter-label { display: inline-block; padding: 5px 15px; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.75rem; font-weight: bold; transition: 0.3s; background: rgba(0, 0, 0, 0.3); }
+.filter-item input:checked + .filter-label { background: var(--ui-light); color: #000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); }
+
+.filter-item input:checked + .st-color { border-color: #00ffcc; color: #00ffcc; background: rgba(0, 255, 204, 0.1); }
+.filter-item input:checked + .fd-color { border-color: #ffff00; color: #ffff00; background: rgba(255, 255, 0, 0.1); }
+.filter-item input:checked + .od-color { border-color: #ff0066; color: #ff0066; background: rgba(255, 0, 102, 0.1); }
+.filter-item input:checked + .ul-color { border-color: #aa00ff; color: #aa00ff; background: rgba(170, 0, 255, 0.1); }
+
+.level-range-filter { display: flex; align-items: center; gap: 8px; margin-left: 10px; color: var(--ui-light); font-size: 0.8rem; }
+.level-range-filter input { width: 60px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--ui-mid); color: var(--accent-blue); padding: 4px 8px; text-align: center; font-family: var(--font-main); outline: none; }
+.level-range-filter input::-webkit-inner-spin-button, .level-range-filter input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.level-range-filter input:focus { border-color: var(--accent-blue); background: rgba(0, 210, 255, 0.1); }
+
+.track-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: 565px; overflow-y: auto; padding-right: 10px; }
+.track-container { display: flex; flex-direction: column; gap: 4px; }
+.track-row { position: relative; padding: 20px 40px; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); cursor: pointer; text-decoration: none; color: inherit; }
+
+.side-l { background: linear-gradient(90deg, var(--ui-gray) 0%, transparent 100%); clip-path: polygon(0 0, 90% 0, 98% 100%, 0% 100%); margin-right: 8%; }
+.side-r { background: linear-gradient(-90deg, var(--ui-gray) 0%, transparent 100%); clip-path: polygon(2% 0, 100% 0, 100% 100%, 10% 100%); margin-left: 8%; text-align: right; }
+
+.side-l:hover { transform: translateX(30px); background: var(--ui-light); color: #000; border-left: 6px solid var(--accent-red); }
+.side-r:hover { transform: translateX(-30px); background: var(--ui-light); color: #000; border-right: 6px solid var(--accent-blue); }
+
+.track-cell { display: flex; align-items: center; gap: 20px; }
+.side-r .track-cell { justify-content: flex-end; }
+
+.track-levels { display: flex; }
+.ST-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #3dff3d; font-style: italic; }
+.FD-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #ffff3d; font-style: italic; }
+.OD-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: var(--accent-red); font-style: italic; }
+.UL-label { padding: 5px; font-size: 1.5rem; font-weight: 900; color: #9e3dff; font-style: italic; }
+
+.track-row:hover .ST-label { color: #008000; }
+.track-row:hover .FD-label { color: #8a8a00; }
+.track-row:hover .OD-label { color: #b30000; }
+.track-row:hover .UL-label { color: #5a00b3; }
+
+.track-row:hover .track-cell [class*="-label"] { text-shadow: 1px 1px 0px rgba(255,255,255,0.5); transition: color 0.3s; }
+.track-title { font-size: 1.6rem; font-weight: 700; display: block; line-height: 1.2; }
+.track-artist { font-size: 0.85rem; opacity: 0.6; }
+
+
+/* =========================================
+   モバイル・スマホ最適化（上書き・追加）
+   ========================================= */
+
+@media (max-width: 800px) {
+    /* 1. 楽曲リストのホバー・タップ時のガタつき・ズレを完全に抑え込む */
+    .track-row {
+        margin: 0 0 10px 0 !important;
+        clip-path: none !important;
+        transform: none !important;
+        padding: 15px 20px !important;
+        background: var(--ui-gray) !important; /* グラデーションから単色にして見やすく */
+        border: 1px solid var(--ui-mid);
+        border-radius: 4px;
+    }
+
+    /* スマホではホバーアニメーションを無効化（横揺れを防止） */
+    .side-l:hover, .side-r:hover {
+        transform: none !important;
+        background: var(--ui-gray) !important;
+        color: var(--ui-light) !important;
+        border-left: none !important;
+        border-right: none !important;
+    }
+
+    /* セル内の配置をスマホ用に最適化 */
+    .track-cell {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 10px;
+    }
+    .side-r .track-cell {
+        text-align: left;
+    }
+
+    .track-title {
+        font-size: 1.3rem; /* 文字サイズを少しスマホ向けに小さく */
+    }
+
+    /* 2. スクールトラップ対策：スマホではリストを固定高にせず全表示（または高さを広げる） */
+    .track-scroll-area {
+        max-height: none !important; 
+        overflow-y: visible !important;
+        padding-right: 0;
+    }
+
+    /* 3. 難易度・レベルソートの余白調整 */
+    .filter-group {
+        gap: 8px 5px; /* 縦方向の隙間をしっかり確保 */
+    }
+    .filter-header {
+        margin-bottom: 5px;
+        transform: none; /* スマホでは斜めを戻して文字を読みやすく */
+    }
+    .level-range-filter {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 4. 極小画面（iPhone SEなど）でのキーボード配置の崩れ防止 */
+    .how-to-container {
+        padding: 20px 10px;
+    }
+    .key-row-top {
+        gap: 8px;
+    }
+    .kb-key {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    .space-key {
+        width: 150px;
+    }
+    
+    /* ニュースの文字サイズ微調整 */
+    .news-headline {
+        font-size: 1rem;
+    }
+}
