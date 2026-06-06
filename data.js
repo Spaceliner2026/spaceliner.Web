@@ -372,6 +372,24 @@ const MUSIC_DATA = [
         FD: "20",
         OD: "24",
         UL: ""
+    },
+    {
+        title: "可惜夜",
+        artist: "GuerNica",
+        //楽曲Level
+        ST: "5",
+        FD: "13",
+        OD: "19",
+        UL: ""
+    },
+    {
+        title: "贖罪",
+        artist: "Folder feat. asa",
+        //楽曲Level
+        ST: "7",
+        FD: "16",
+        OD: "23",
+        UL: ""
     }
 ];
 
