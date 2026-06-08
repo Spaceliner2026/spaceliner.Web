@@ -408,6 +408,15 @@ const MUSIC_DATA = [
         FD: "16",
         OD: "23",
         UL: ""
+    },
+    {
+        title: "Blitzkring UK",
+        artist: "サイタケ",
+        //楽曲Level
+        ST: "7",
+        FD: "16",
+        OD: "23",
+        UL: ""
     }
 ];
 
