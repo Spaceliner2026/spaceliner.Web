@@ -349,7 +349,7 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "7",
         FD: "21",
-        OD: "24",
+        OD: "25",
         UL: "25"
     },
     {
