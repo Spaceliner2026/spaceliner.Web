@@ -644,7 +644,7 @@ body.is-loaded main {
 .level-range-filter input::-webkit-inner-spin-button, .level-range-filter input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 .level-range-filter input:focus { border-color: var(--accent-blue); background: rgba(0, 210, 255, 0.1); }
 
-.track-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: 565px; overflow-y: auto; padding-right: 10px; }
+.track-scroll-area { display: flex; flex-direction: column; gap: 15px; max-height: none; overflow-y: visible; padding-right: 0; }
 .track-container { display: flex; flex-direction: column; gap: 4px; }
 .track-row { position: relative; padding: 20px 40px; transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1); cursor: pointer; text-decoration: none; color: inherit; }
 
