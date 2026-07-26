@@ -539,6 +539,20 @@ const BOARD_DATA = [
 ];
 
 
+const NOTATION_DATA = [
+  {
+    "date": "2026/07/26",
+    "title": "公式ソーシャルメディアガイドライン",
+    "body": "公式アカウント一覧および運用方針について。\\n以下のリンクからアクセスしてください。",
+    "linkUrls": [
+      "https://x.com/your_account",
+      "https://www.youtube.com/@your_channel",
+      "https://example.com/guideline"
+    ]
+  }
+];
+
+
 
 
 
