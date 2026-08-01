@@ -1,161 +1,133 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRACK LIST | Spaceliner Official</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="data.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUSIC LIST | Spaceliner (スペライ) 公式サイト</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="page-music">
+  <!-- 背景描画用Canvas -->
+  <canvas id="js-space-bg"></canvas>
 
-    <header class="support-hero">
-        <div class="hero-content">
-            <h1>TRACK ARCHIVE</h1>
-            <p>ALL MUSIC LIST</p>
-        </div>
+  <div class="l-wrapper">
+    <header class="l-header" id="l-header">
+      <div class="l-header__inner">
+        <h1 class="l-header__logo">
+          <a href="index.html">
+            <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="logo-icon">
+          </a>
+        </h1>
+        <nav class="l-header__nav">
+          <ul class="l-header__navList">
+            <li class="l-header__navItem"><a href="index.html">TOP<span>トップ</span></a></li>
+            <li class="l-header__navItem"><a href="news.html">NEWS<span>お知らせ</span></a></li>
+            <li class="l-header__navItem"><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+            <li class="l-header__navItem"><a href="music.html" class="is-active">MUSIC<span>楽曲リスト</span></a></li>
+            <li class="l-header__navItem"><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <section id="tracks">
-        <h2 class="sl-title">TRACKLIST</h2>
-        <div class="search-container">
-            <input type="text" id="track-search" placeholder="SEARCH TRACK OR ARTIST..." oninput="filterTracks()">
-            <div class="filter-group">
-                <div class="filter-header">Difficulty sort</div>
-                    <label class="filter-item">
-                        <input type="checkbox" value="ST" checked onchange="filterTracks()">
-                        <span class="filter-label st-color">STANDARD</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="FD" checked onchange="filterTracks()">
-                        <span class="filter-label fd-color">FULL DRIVE</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="OD" checked onchange="filterTracks()">
-                        <span class="filter-label od-color">OVERDRIVE</span>
-                    </label>
-                    <label class="filter-item">
-                        <input type="checkbox" value="UL" checked onchange="filterTracks()">
-                        <span class="filter-label ul-color">UNLIMITED</span>
-                    </label>
-                <div class="filter-header" style="margin-left: 10px;">Level sort</div>
-                <div class="level-range-filter">
-                    <span>Lv.</span>
-                    <input type="number" id="lv-min" min="1" max="30" placeholder="MIN" oninput="filterTracks()">
-                    <span>〜</span>
-                    <input type="number" id="lv-max" min="1" max="30" placeholder="MAX" oninput="filterTracks()">
-                </div>
-            </div>
+
+<!-- 初回訪問時 BGM確認モーダル -->
+<div class="c-bgm-modal" id="js-bgm-modal" style="display: none;">
+  <div class="c-bgm-modal__content">
+    <div class="c-bgm-modal__icon">🎵</div>
+    <h3 class="c-bgm-modal__title">SOUND SETTING</h3>
+    <p class="c-bgm-modal__desc">バックグラウンドミュージックを再生しますか？<br><small>※後から画面右下のボタンでいつでも切り替えられます</small></p>
+    <div class="c-bgm-modal__btns">
+      <button class="c-btn c-btn--secondary" id="js-bgm-no">オフで開始</button>
+      <button class="c-btn c-btn--primary" id="js-bgm-yes">BGMを再生</button>
+    </div>
+  </div>
+</div>
+
+<!-- 右下の固定トグルボタン -->
+<div class="c-bgm-control">
+  <button id="js-bgm-trigger" class="c-bgm-btn" aria-label="BGM Play/Mute">
+    <span class="c-bgm-btn__icon">🎵</span>
+    <span class="c-bgm-btn__text">BGM OFF</span>
+  </button>
+</div>
+
+<audio id="js-bgm-audio" src="KENP.wav" loop preload="auto"></audio>
+
+
+
+    <div class="p-pageHeader">
+      <div class="l-container">
+        <h1 class="p-pageHeader__title">MUSIC LIST <span>収録楽曲リスト</span></h1>
+      </div>
+    </div>
+
+    <section class="p-section">
+      <div class="l-container">
+        <div class="p-musicFilter">
+          <input type="text" id="js-music-search" placeholder="曲名・アーティスト名で検索..." class="p-musicFilter__input">
         </div>
-        <div class="track-scroll-area">
-            <div id="track-container" class="track-container">
-                <p class="loading">SYNCING DATA...</p>
-            </div>
+
+        <div class="p-musicTableWrap">
+          <table class="p-musicTable">
+            <thead>
+              <tr>
+                <th class="col-title">楽曲名 / アーティスト</th>
+                <th class="col-diff st">ST</th>
+                <th class="col-diff fd">FD</th>
+                <th class="col-diff od">OD</th>
+                <th class="col-diff ul">UL</th>
+              </tr>
+            </thead>
+            <tbody id="js-music-table-body">
+              <!-- Loaded via data.js -->
+            </tbody>
+          </table>
         </div>
+      </div>
     </section>
-    
-    <footer>
-        <small>&copy; 2025-<span id="current-year"></span> PROJECT SPACELINER. All rights reserved.</small>
-        <script>
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-        </script>
+
+    <!-- Footer -->
+    <footer class="l-footer">
+      <div class="l-footer__inner">
+        <div class="l-footer__sns">
+          <h3 class="l-footer__snsTitle">OFFICIAL SNS<span>公式SNSアカウント</span></h3>
+          <div class="l-footer__snsList">
+            <a href="https://x.com/ONSOU_2025" class="c-sns-card c-sns-card--x" target="_blank" rel="noopener" aria-label="公式X (Twitter)">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>X (Twitter)</strong>
+                <small>最新ニュース・アプデ情報</small>
+              </div>
+            </a>
+            <a href="https://youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw?si=KaW3H21GmdWdqMTu" class="c-sns-card c-sns-card--yt" target="_blank" rel="noopener" aria-label="公式YouTube">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>YouTube</strong>
+                <small>楽曲PV・試聴動画</small>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="l-footer__logo">Spaceliner</div>
+        <p class="l-footer__copy">&copy; 2025-2026 PROJECT SPACELINER. All rights reserved.</p>
+      </div>
     </footer>
+  </div>
 
-    <script>
-    // 検索フィルタリング用の関数
-        function filterTracks() {
-            const keyword = document.getElementById('track-search').value.toLowerCase();
-            const selectedLevels = Array.from(document.querySelectorAll('.filter-group input[type="checkbox"]:checked'))
-                                        .map(cb => cb.value);
-
-            // 入力がない場合は、最小を0、最大を99として扱う
-            const minInput = document.getElementById('lv-min').value;
-            const maxInput = document.getElementById('lv-max').value;
-
-            // 数値入力の値を取得（空の場合は制限なし）
-            const minLv = minInput === "" ? 0 : parseInt(minInput);
-            const maxLv = maxInput === "" ? 99 : parseInt(maxInput);
-
-            renderTracks(keyword, selectedLevels, minLv, maxLv);
-        }
-        // ページ読み込み時に全ての曲パネルを表示するための初期実行
-        window.onload = function() {
-            // renderNews();
-            // 初期状態（空検索、全難易度、Lv0〜99）で呼び出し
-            renderTracks("", ["ST", "FD", "OD", "UL"], 0, 99);
-            
-            // --- 追加：アニメーション制御 ---
-            const loader = document.getElementById('loader');
-                
-            // 1.5秒間「INITIALIZING...」を見せてからフェードアウト
-            setTimeout(() => {
-                loader.classList.add('is-finished');
-                document.body.classList.add('is-loaded');
-                    
-                // アニメーションが終わったらDOMから削除（メモリ節約）
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 800);
-            }, 1000);
-        };
-
-        function renderTracks(searchKeyword = "", selectedLevels = [], minLv = 0, maxLv = 99) {
-            const container = document.getElementById('track-container');
-            if(!container || !MUSIC_DATA) return;
-            container.innerHTML = '';
-
-            const filteredData = MUSIC_DATA.filter(track => {
-                // 1. 検索ワード判定
-                const matchesKeyword = track.title.toLowerCase().includes(searchKeyword) || 
-                                       track.artist.toLowerCase().includes(searchKeyword);
-        
-                // 2. 難易度種類 & 数値判定
-                // 選択された各難易度（ST, FD等）のうち、一つでも「数値が範囲内」であれば合格
-                const hasMatchingLevel = selectedLevels.some(lv => {
-                    const lvValue = parseInt(track[lv]);
-                    if (!lvValue) return false; // その難易度が存在しない場合は除外
-                    return lvValue >= minLv && lvValue <= maxLv;
-                });
-
-                return matchesKeyword && hasMatchingLevel;
-            });
-
-            if (filteredData.length === 0) {
-                container.innerHTML = '<p class="loading">NO TRACKS FOUND</p>';
-                return;
-            }
-
-            // 描画処理
-            filteredData.forEach((track, index) => {
-                const sideClass = (index % 2 === 0) ? 'side-l' : 'side-r';
-                const div = document.createElement('div');
-                div.className = `track-row ${sideClass}`;
-        
-               const getLvHtml = (label, value) => {
-                    if (!value || value === "") return "";
-                    return `<div class="${label}-label">Lv.${value}</div>`;
-                };
-                    
-                div.innerHTML = `
-                    <div class="track-cell">
-                        <div class="track-info">
-                            <span class="track-artist">${track.artist}</span>
-                            <span class="track-title">${track.title}</span>
-                        </div>
-                        <div class="track-levels">
-                            ${getLvHtml('ST', track.ST)}
-                            ${getLvHtml('FD', track.FD)}
-                            ${getLvHtml('OD', track.OD)}
-                            ${getLvHtml('UL', track.UL)}
-                        </div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        renderTracks();
-    </script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="bg-engine.js"></script>
 </body>
 </html>

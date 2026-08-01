@@ -1,334 +1,247 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="_KMajbnJ4Vms5pa0WgsNROOZJy49E9UuADMhf4TitmY" />
-    <title>Spaceliner | Official Site</title>
-    <link rel="icon" href="spaceliner_icon_1024_fab.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaceliner (スペライ) 公式サイト | 4+1形式 PC向け宇宙遠征音楽ゲーム</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div id="loader" class="boot-overlay">
-            <div class="boot-text">SYSTEM LOADING...</div>
-    </div>
+<body class="page-top">
+  <!-- 背景描画用Canvas（最背面に固定配置されます） -->
+  <canvas id="js-space-bg"></canvas>
 
-    <div class="bg-container">
-        <div class="grid-3d"></div>
-        <div class="cross-line-l"></div>
-        <div class="cross-line-r"></div>
-        <div class="scanlines"></div>
-    </div>
-
-    <nav class="side-nav">
-        <ul>
-            <li><a href="#top">TOP</a></li>
-            <li><a href="#news">NEWS</a></li>
-            <li><a href="#how-to-play">HOW</a></li>
-            <li><a href="#tracks">MUSIC</a></li>
-            <li><a href="support.html">SUPPORT</a></li>
-            <li><a href="#download">DL</a></li>
-        </ul>
-    </nav>
-
-    <header id="top" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content fade-in">
-            <div class="logo-area">
-                <img src="spaceliner_icon_1024.png" alt="Icon" class="hero-icon">
-                <h1>SPACELINER</h1>
-            </div>
-            <p class="hero-tagline">SYNCED WITH THE GALAXY</p>
-            
-            <div class="hero-action-area" style="margin-top: 40px;">
-                <a href="#download" class="news-more-button">FREE DOWNLOAD // 無料ダウンロード</a>
-            </div>
-        </div>
+  <div class="l-wrapper">
+    <!-- Header -->
+    <header class="l-header" id="l-header">
+      <div class="l-header__inner">
+        <h1 class="l-header__logo">
+          <a href="index.html">
+            <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="logo-icon">
+          </a>
+        </h1>
+        <nav class="l-header__nav">
+          <ul class="l-header__navList">
+            <li class="l-header__navItem"><a href="index.html" class="is-active">TOP<span>トップ</span></a></li>
+            <li class="l-header__navItem"><a href="news.html">NEWS<span>お知らせ</span></a></li>
+            <li class="l-header__navItem"><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+            <li class="l-header__navItem"><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
+            <li class="l-header__navItem"><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
-    <main>
-        <section id="news">
-            <h2 class="sl-title">NEWS</h2>
-            <div id="news-container" class="news-scroll-area">
-                <p class="loading">SYNCING DATA...</p>
-            </div>
-        </section>
-
-        <div class="top-panels-container">
-            <section id="how-to-play">
-                <h2 class="sl-title">HOW</h2>
-                <div class="how-to-container">
-                    <div class="how-to-header">CONTROLS: 4+1 KEY SYSTEM</div>
-                
-                    <div class="control-layout">
-                        <div class="key-row-top">
-                            <div class="kb-key">D</div>
-                            <div class="kb-key">F</div>
-                            <div class="kb-key">J</div>
-                            <div class="kb-key">K</div>
-                        </div>
-
-                        <div class="key-row-mid">
-                            <div class="key-separator">+</div>
-                        </div>
-
-                        <div class="key-row-bottom">
-                            <div class="kb-key space-key">SPACE</div>
-                        </div>
-                    </div>
-
-                    <p class="how-to-footer">正確にキーを刻め。</p>
-                </div>
-            </section>
-        
-            <section id="judgement" class="info-panel">
-                <h2 class="sl-title">SYSTEM</h2>
-                <div class="result-ui-mock">
-                    <div class="result-header">JUDGEMENT PARAMETER</div>
-                    <div class="result-body">
-                        <div class="judge-row"><span class="label">SYNCED</span><span class="desc">完全同期</span></div>
-                        <div class="judge-row"><span class="label">LINKED</span><span class="desc">接続</span></div>
-                        <div class="judge-row"><span class="label">NOISE</span><span class="desc">誤差あり</span></div>
-                        <div class="judge-row"><span class="label">LOST</span><span class="desc">紛失</span></div>
-                        <div class="judge-row error"><span class="label">ERROR</span><span class="desc">異常</span></div>
-                    </div>
-                </div>
-            </section>
+    <!-- 初回訪問時 BGM確認モーダル -->
+    <div class="c-bgm-modal" id="js-bgm-modal" style="display: none;">
+      <div class="c-bgm-modal__content">
+        <div class="c-bgm-modal__icon">🎵</div>
+        <h3 class="c-bgm-modal__title">SOUND SETTING</h3>
+        <p class="c-bgm-modal__desc">バックグラウンドミュージックを再生しますか？<br><small>※後から画面右下のボタンでいつでも切り替えられます</small></p>
+        <div class="c-bgm-modal__btns">
+          <button class="c-btn c-btn--secondary" id="js-bgm-no">オフで開始</button>
+          <button class="c-btn c-btn--primary" id="js-bgm-yes">BGMを再生</button>
         </div>
-        
-        <section id="tracks">
-            <h2 class="sl-title">TRACKLIST</h2>
-            
-            <div class="news-more-btn-area" style="margin-top: 0; margin-bottom: 40px;">
-                <a href="music.html" class="news-more-button">VIEW ALL TRACKS // 楽曲一覧を見る</a>
-            </div>
+      </div>
+    </div>
 
-        </section>
+    <!-- 右下の固定トグルボタン -->
+    <div class="c-bgm-control">
+      <button id="js-bgm-trigger" class="c-bgm-btn" aria-label="BGM Play/Mute">
+        <span class="c-bgm-btn__icon">🎵</span>
+        <span class="c-bgm-btn__text">BGM OFF</span>
+      </button>
+    </div>
 
-        <section id="connect">
-            <h2 class="sl-title">CONNECT</h2>
-            <div class="connect-grid">
-                <a href="https://discord.gg/RG5QnGfpXJ" class="connect-card discord" target="_blank">
-                    <div class="connect-tag">COMMUNITY</div>
-                    <div class="connect-name">DISCORD</div>
-                    <p class="connect-desc">最新情報の確認や不具合報告、交流はこちらから。</p>
-                </a>
-                <a href="https://x.com/ONSOU_2025" class="connect-card x-twitter" target="_blank">
-                    <div class="connect-tag">SIGNAL</div>
-                    <div class="connect-name">X (旧TWITTER)</div>
-                    <p class="connect-desc">開発進捗や、日々のアップデートをリアルタイムで発信。</p>
-                </a>
-                <a href="https://www.youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw" class="connect-card youtube" target="_blank">
-                    <div class="connect-tag">RECORDS</div>
-                    <div class="connect-name">YOUTUBE</div>
-                    <p class="connect-desc">新曲のプレビュー映像やプレイ動画をアーカイブ。</p>
-                </a>
-            </div>
-        </section>
-        
-        <section id="related">
-            <h2 class="sl-title">RELATED PROJECT</h2>
-            <div class="related-container">
-                <a href="https://onsou2025.github.io/ONSOU-Home/" class="related-banner">
-                    <div class="related-content">
-                        <span class="related-tag">RELATED PROJECT</span>
-                        <h3 class="related-name">音奏 -ONSOU-</h3>
-                        <p class="related-text">「音」を奏でる、もう一つのゲーム。</p>
-                    </div>
-                    <div class="related-arrow">VIEW SITE →</div>
-                </a>
-            </div>
-        </section>
-        
-        <section id="download">
-            <h2 class="sl-title">DOWNLOAD</h2>
-            <div class="dl-card">
-                <a href="https://github.com/Spaceliner2026/spaceliner.Web/releases/download/Spaceliner_Installer-v2/Spaceliner_setup-v4.zip" class="dl-button" target="_blank">ACCESS DRIVE</a>
-                <div class="spec-grid">
-                    <div class="spec-item">
-                        <h4 class="sub-title">SYSTEM REQUIREMENTS</h4>
-                        <ul>
-                            <li>Windows 10 / 11 (64bit)</li>
-                            <li>Intel Core i3 / 4GB RAM</li>
-                            <li>1GB STORAGE</li>
-                        </ul>
-                    </div>
-                    <div class="spec-item caution">
-                        <h4 class="sub-title">CAUTION</h4>
-                        <ul>
-                            <li>Zipは必ず「すべて展開」してください</li>
-                            <li>詳細情報はSUPPORTページを確認してください</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <audio id="js-bgm-audio" src="KENP.wav" loop preload="auto"></audio>
 
-    <footer>
-        <small>&copy; 2025-<span id="current-year"></span> PROJECT SPACELINER. All rights reserved.</small>
-        <script>
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-        </script>
+    <!-- Main Visual / KV -->
+    <section class="p-top-kv">
+      <!-- 背景全画面スライドショー -->
+      <div class="p-hero-slider" id="js-hero-slider">
+        <div class="p-hero-slider__track" id="js-slider-track">
+          <div class="p-hero-slider__item">
+            <img src="images/ss-01.png" alt="Spaceliner スクリーンショット 1">
+          </div>
+          <div class="p-hero-slider__item">
+            <img src="images/ss-02.png" alt="Spaceliner スクリーンショット 2">
+          </div>
+          <div class="p-hero-slider__item">
+            <img src="images/ss-03.png" alt="Spaceliner スクリーンショット 3">
+          </div>
+        </div>
+
+        <!-- 左右切り替えボタン -->
+        <button class="p-hero-slider__btn p-hero-slider__btn--prev" id="js-slider-prev" aria-label="前の画像へ">❮</button>
+        <button class="p-hero-slider__btn p-hero-slider__btn--next" id="js-slider-next" aria-label="次の画像へ">❯</button>
+
+        <!-- ドットナビゲーション -->
+        <div class="p-hero-slider__dots" id="js-slider-dots"></div>
+      </div>
+
+      <!-- オーバーレイ（文字の可読性を上げる薄暗いフィルム） -->
+      <div class="p-top-kv__overlay"></div>
+
+      <!-- タイトル・キャッチコピー（スライドの上に重なるエリア） -->
+      <div class="p-top-kv__content">
+        <div class="p-top-kv__badge">PC向け 4+1形式 宇宙遠征リズムゲーム</div>
+        <h2 class="p-top-kv__title">Spaceliner (スペライ)</h2>
+        <p class="p-top-kv__desc">乗組員よ、コックピットに就け。<br>4本のレーンと1つの特殊ノートが織りなす極上の音響空間航行。</p>
+
+        <div class="p-top-kv__diffs">
+          <span class="diff-badge st">STANDARD</span>
+          <span class="diff-badge fd">FULLDRIVE</span>
+          <span class="diff-badge od">OVERDRIVE</span>
+          <span class="diff-badge ul">UNLIMITED</span>
+        </div>
+
+        <div class="p-top-kv__btnWrap">
+          <a href="download.html" class="c-btn c-btn--primary" target="_blank" rel="noopener">
+            <span>GAME DOWNLOAD</span>
+            <small>最新バージョンをダウンロード</small>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Topics Slider Banner Section -->
+    <section class="p-section p-top-topics">
+      <div class="l-container">
+        <h2 class="c-sectionTitle">
+          <span class="en">TOPICS</span>
+          <span class="ja">トピックス</span>
+        </h2>
+        <div class="p-top-topics__grid">
+          <div class="p-top-topics__card">
+            <div class="tag">UPDATE</div>
+            <div class="title">Ver 1.3.31 修正パッチ配信開始！</div>
+            <p>コックピット環境の改善および各種不具合の修正を行いました。快適になった演奏空間をお楽しみください。</p>
+          </div>
+          <div class="p-top-topics__card">
+            <div class="tag">NEW MUSIC</div>
+            <div class="title">Ver 1.3.30 新曲9曲＆SHOP機能解禁！</div>
+            <p>第2回楽曲公募の採用曲を含む計9曲を新規実装！蓄積した「E」で楽曲を解放しよう。</p>
+          </div>
+          <div class="p-top-topics__card">
+            <div class="tag">EVENT</div>
+            <div class="title">楽曲公募プロジェクト常時開催中！</div>
+            <p>あなたの音楽が『Spaceliner』の銀河を彩る。魂のこもった1曲をお待ちしております。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWS Section -->
+    <section class="p-section p-top-news">
+      <div class="l-container">
+        <h2 class="c-sectionTitle">
+          <span class="en">NEWS</span>
+          <span class="ja">お知らせ</span>
+        </h2>
+        <div class="p-top-news__list" id="js-top-news">
+          <!-- Loaded via data.js -->
+        </div>
+        <div class="p-top-news__more">
+          <a href="news.html" class="c-btn c-btn--secondary"><span>お知らせ一覧へ</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO PLAY Overview Section -->
+    <section class="p-section p-top-howtoplay">
+      <div class="l-container">
+        <h2 class="c-sectionTitle">
+          <span class="en">ABOUT GAME</span>
+          <span class="ja">「Spaceliner」とは？</span>
+        </h2>
+        <div class="p-top-howtoplay__box">
+          <div class="p-top-howtoplay__text">
+            <h3>乗組員となり、宇宙航路を開拓せよ</h3>
+            <p>『Spaceliner（スペライ）』は、PCでプレイする<b>4+1形式</b>の音楽ゲームです。<br>
+            4つの基本レーンから迫るノーツに加え、宙を舞う「1」の特殊ノーツを裁くスリリングな演奏体験！</p>
+            <p>難易度は<b>STANDARD</b>、<b>FULLDRIVE</b>、<b>OVERDRIVE</b>、そして深淵への扉<b>UNLIMITED</b>の4段階を搭載。</p>
+            <div class="btn-wrap">
+              <a href="howtoplay.html" class="c-btn c-btn--secondary"><span>詳しい遊び方を見る</span></a>
+            </div>
+          </div>
+          <div class="p-top-howtoplay__visual">
+            <div class="cockpit-mock">
+              <div class="lane-container">
+                <div class="lane"></div>
+                <div class="lane"></div>
+                <div class="lane"></div>
+                <div class="lane"></div>
+                <div class="special-note">SPACE NOTE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSIC Preview Section -->
+    <section class="p-section p-top-music">
+      <div class="l-container">
+        <h2 class="c-sectionTitle">
+          <span class="en">FEATURED MUSIC</span>
+          <span class="ja">収録楽曲ピックアップ</span>
+        </h2>
+        <p class="p-top-music__lead">多彩なアーティストによる至高のサウンドトラックが乗組員の挑戦を待っている！</p>
+        <div class="p-top-music__grid" id="js-top-music">
+          <!-- Loaded via data.js -->
+        </div>
+        <div class="p-top-music__more">
+          <a href="music.html" class="c-btn c-btn--secondary"><span>全楽曲リストを見る</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="l-footer">
+      <div class="l-footer__inner">
+        <div class="l-footer__sns">
+          <h3 class="l-footer__snsTitle">OFFICIAL SNS<span>公式SNSアカウント</span></h3>
+          
+          <div class="l-footer__snsList">
+            <!-- 公式X (Twitter) -->
+            <a href="https://x.com/ONSOU_2025" class="c-sns-card c-sns-card--x" target="_blank" rel="noopener" aria-label="公式X (Twitter)">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>X (Twitter)</strong>
+                <small>最新ニュース・アプデ情報</small>
+              </div>
+            </a>
+
+            <!-- 公式YouTube -->
+            <a href="https://youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw?si=KaW3H21GmdWdqMTu" class="c-sns-card c-sns-card--yt" target="_blank" rel="noopener" aria-label="公式YouTube">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>YouTube</strong>
+                <small>楽曲PV・試聴動画</small>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="l-footer__logo">Spaceliner</div>
+        <p class="l-footer__copy">&copy; 2025-2026 PROJECT SPACELINER. All rights reserved.</p>
+      </div>
     </footer>
+  </div>
 
-    <script src="data.js"></script>
-    <script>
-        
-    // Newsの呼び出し（最新3件のみ初期表示）
-    function renderNews() {
-        const container = document.getElementById('news-container');
-        if(!container || !NEWS_DATA) return;
-        container.innerHTML = '';
-    
-        // 最初の3件だけを取り出す
-        const displayData = NEWS_DATA.slice(0, 3);
-    
-        displayData.forEach((item, index) => {
-            const article = document.createElement('article');
-            article.className = 'news-item accordion-item';
-        
-            const bodyText = item.body.replace(/\n/g, '<br>');
-            const linkHtml = item.linkUrl ? `<a href="${item.linkUrl}" class="news-link" target="_blank">VIEW DETAILS</a>` : '';
-
-            // 💡 階層を整理し、日付・タイトル・＋ボタンを一つのheaderにまとめました
-            article.innerHTML = `
-                <div class="news-header" onclick="toggleNews(${index})">
-                    <span class="news-date">${item.date}</span>
-                    <h3 class="news-headline">${item.title}</h3>
-                    <span class="news-icon">＋</span>
-                </div>
-                <div id="news-content-${index}" class="news-content">
-                    <div class="news-body-inner">
-                        <div class="news-body">${bodyText}</div>
-                        ${linkHtml}
-                    </div>
-                </div>`;
-            container.appendChild(article);
-        });
-
-        // 3件の下に「NEWS一覧」のボタンを追加
-        const btnContainer = document.createElement('div');
-        btnContainer.className = 'news-more-btn-area';
-        btnContainer.innerHTML = `
-            <a href="news.html" class="news-more-button">MORE NEWS // 一覧を見る</a>
-        `;
-        container.appendChild(btnContainer);
-    }
-
-        // 開閉用関数
-        function toggleNews(index) {
-            const content = document.getElementById(`news-content-${index}`);
-            const item = content.parentElement;
-            
-            // 他のニュースを閉じたい場合はこれを有効化したらいいよ~
-            // document.querySelectorAll('.news-content').forEach(el => {
-            //    if(el.id !== `news-content-${index}`) el.classList.remove('is-open');
-            // });
-
-            content.classList.toggle('is-open');
-            item.classList.toggle('is-active');
-            
-            // アイコンの切り替え
-            const icon = item.querySelector('.news-icon');
-            icon.textContent = content.classList.contains('is-open') ? '－' : '＋';
-        }
-        
-        // 検索フィルタリング用の関数
-        function filterTracks() {
-            const keyword = document.getElementById('track-search').value.toLowerCase();
-            const selectedLevels = Array.from(document.querySelectorAll('.filter-group input[type="checkbox"]:checked'))
-                                        .map(cb => cb.value);
-
-            // 入力がない場合は、最小を0、最大を99として扱う
-            const minInput = document.getElementById('lv-min').value;
-            const maxInput = document.getElementById('lv-max').value;
-
-            // 数値入力の値を取得（空の場合は制限なし）
-            const minLv = minInput === "" ? 0 : parseInt(minInput);
-            const maxLv = maxInput === "" ? 99 : parseInt(maxInput);
-
-            renderTracks(keyword, selectedLevels, minLv, maxLv);
-        }
-        // ページ読み込み時に全ての曲パネルを表示するための初期実行
-        window.onload = function() {
-            renderNews();
-            // 初期状態（空検索、全難易度、Lv0〜99）で呼び出し
-            renderTracks("", ["ST", "FD", "OD", "UL"], 0, 99);
-            
-            // --- 追加：アニメーション制御 ---
-            const loader = document.getElementById('loader');
-                
-            // 1.5秒間「INITIALIZING...」を見せてからフェードアウト
-            setTimeout(() => {
-                loader.classList.add('is-finished');
-                document.body.classList.add('is-loaded');
-                    
-                // アニメーションが終わったらDOMから削除（メモリ節約）
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 800);
-            }, 1000);
-        };
-
-        function renderTracks(searchKeyword = "", selectedLevels = [], minLv = 0, maxLv = 99) {
-            const container = document.getElementById('track-container');
-            if(!container || !MUSIC_DATA) return;
-            container.innerHTML = '';
-
-            const filteredData = MUSIC_DATA.filter(track => {
-                // 1. 検索ワード判定
-                const matchesKeyword = track.title.toLowerCase().includes(searchKeyword) || 
-                                       track.artist.toLowerCase().includes(searchKeyword);
-        
-                // 2. 難易度種類 & 数値判定
-                // 選択された各難易度（ST, FD等）のうち、一つでも「数値が範囲内」であれば合格
-                const hasMatchingLevel = selectedLevels.some(lv => {
-                    const lvValue = parseInt(track[lv]);
-                    if (!lvValue) return false; // その難易度が存在しない場合は除外
-                    return lvValue >= minLv && lvValue <= maxLv;
-                });
-
-                return matchesKeyword && hasMatchingLevel;
-            });
-
-            if (filteredData.length === 0) {
-                container.innerHTML = '<p class="loading">NO TRACKS FOUND</p>';
-                return;
-            }
-
-            // 描画処理
-            filteredData.forEach((track, index) => {
-                const sideClass = (index % 2 === 0) ? 'side-l' : 'side-r';
-                const div = document.createElement('div');
-                div.className = `track-row ${sideClass}`;
-        
-               const getLvHtml = (label, value) => {
-                    if (!value || value === "") return "";
-                    return `<div class="${label}-label">Lv.${value}</div>`;
-                };
-                    
-                div.innerHTML = `
-                    <div class="track-cell">
-                        <div class="track-info">
-                            <span class="track-artist">${track.artist}</span>
-                            <span class="track-title">${track.title}</span>
-                        </div>
-                        <div class="track-levels">
-                            ${getLvHtml('ST', track.ST)}
-                            ${getLvHtml('FD', track.FD)}
-                            ${getLvHtml('OD', track.OD)}
-                            ${getLvHtml('UL', track.UL)}
-                        </div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-        
-        renderNews();
-        renderTracks();
-    </script>
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <!-- 背景エンジンJavaScriptの読み込み -->
+  <script src="bg-engine.js"></script>
 </body>
 </html>

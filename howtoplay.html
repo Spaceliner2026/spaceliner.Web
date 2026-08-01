@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NEWS | Spaceliner (スペライ) 公式サイト</title>
+  <title>HOW TO PLAY | Spaceliner (スペライ) 公式サイト</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
-<body class="page-news">
+<body class="page-howtoplay">
   <!-- 背景描画用Canvas -->
   <canvas id="js-space-bg"></canvas>
 
@@ -24,8 +24,8 @@
         <nav class="l-header__nav">
           <ul class="l-header__navList">
             <li class="l-header__navItem"><a href="index.html">TOP<span>トップ</span></a></li>
-            <li class="l-header__navItem"><a href="news.html" class="is-active">NEWS<span>お知らせ</span></a></li>
-            <li class="l-header__navItem"><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+            <li class="l-header__navItem"><a href="news.html">NEWS<span>お知らせ</span></a></li>
+            <li class="l-header__navItem"><a href="howtoplay.html" class="is-active">HOW TO PLAY<span>遊び方</span></a></li>
             <li class="l-header__navItem"><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
             <li class="l-header__navItem"><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
           </ul>
@@ -58,31 +58,90 @@
 <audio id="js-bgm-audio" src="KENP.wav" loop preload="auto"></audio>
 
 
+
     <div class="p-pageHeader">
       <div class="l-container">
-        <h1 class="p-pageHeader__title">NEWS <span>お知らせ</span></h1>
+        <h1 class="p-pageHeader__title">HOW TO PLAY <span>遊び方</span></h1>
       </div>
     </div>
 
     <section class="p-section">
       <div class="l-container">
-        <div class="p-newsList" id="js-news-full-list">
-          <!-- Loaded via data.js -->
+        
+        <!-- System 1: 4+1 Style -->
+        <div class="p-guideBlock">
+          <div class="p-guideBlock__num">01</div>
+          <div class="p-guideBlock__content">
+            <h2>4+1形式のシステム</h2>
+            <p>『Spaceliner(スぺライ)』は、画面上に配置された<b>4本の基本トラック</b>と、全基本トラックにまたがる<b>1つのスペースノーツ</b>を組み合わせてプレイするPC向け音楽ゲームです。</p>
+            <div class="p-guideBlock__grid">
+              <div class="card">
+                <h3>4 Track Notes</h3>
+                <p>画面上部から流れてくるノーツを、タイミングよくキーボードでタップ＆ホールド！</p>
+              </div>
+              <div class="card card--accent">
+                <h3>+1 Space Note</h3>
+                <p>トラックの枠をまたがる特殊ノーツ。視覚と聴覚を集中させて正確に捉えろ！</p>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- System 2: Difficulty -->
+        <div class="p-guideBlock">
+          <div class="p-guideBlock__num">02</div>
+          <div class="p-guideBlock__content">
+            <h2>4段階の難易度設定</h2>
+            <p>乗組員の熟練度に応じた4つの航路を選択可能です。</p>
+            
+            <div class="p-diffGrid">
+              <div class="diffCard st">
+                <div class="title">STANDARD</div>
+                <div class="sub">標準航路</div>
+                <p>音ゲー初心者から楽しめる基本譜面。宇宙遠征の第一歩はここから！</p>
+              </div>
+              <div class="diffCard fd">
+                <div class="title">FULLDRIVE</div>
+                <div class="sub">加速航路</div>
+                <p>疾走感あふれるリズムと適度な歯ごたえを楽しめる中級者向け航路。</p>
+              </div>
+              <div class="diffCard od">
+                <div class="title">OVERDRIVE</div>
+                <div class="sub">限界航路</div>
+                <p>高度な操作精度と判断力が求められる上級者向け高難易度航路！</p>
+              </div>
+              <div class="diffCard ul">
+                <div class="title">UNLIMITED</div>
+                <div class="sub">深淵領域</div>
+                <p>OVERDRIVEでSランク(975,000点)以上を達成した者のみが踏み込める最難関航路。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System 3: Crew & Shop -->
+        <div class="p-guideBlock">
+          <div class="p-guideBlock__num">03</div>
+          <div class="p-guideBlock__content">
+            <h2>乗組員ランク＆SHOP機能</h2>
+            <p>演奏を重ねることでゲーム内通貨「E」を獲得。ショップで新たな楽曲やオプションコンテンツを解放し、選択可能航路を広げていこう！</p>
+            <div class="shop-preview">
+              <div class="shop-item">
+                <div class="tag">SHOP ITEM</div>
+                <h4>新楽曲解禁</h4>
+                <p>演奏で溜めた「E」と交換して新しい楽曲航路を発見しよう！</p>
+              </div>
+              <div class="shop-item">
+                <div class="tag">RATING</div>
+                <h4>レーティング算出</h4>
+                <p>プレイヤーの実力を数値化。上級乗組員を目指そう！</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
-
-    <!-- News Modal -->
-    <div class="c-modal" id="js-news-modal">
-      <div class="c-modal__bg" id="js-modal-bg"></div>
-      <div class="c-modal__content">
-        <button class="c-modal__close" id="js-modal-close">&times;</button>
-        <div class="c-modal__date" id="js-modal-date"></div>
-        <h2 class="c-modal__title" id="js-modal-title"></h2>
-        <div class="c-modal__body" id="js-modal-body"></div>
-        <div class="c-modal__link" id="js-modal-link"></div>
-      </div>
-    </div>
 
     <!-- Footer -->
     <footer class="l-footer">
