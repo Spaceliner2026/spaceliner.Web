@@ -477,6 +477,87 @@ const MUSIC_DATA = [
         FD: "22",
         OD: "26",
         UL: "27"
+    },
+    {
+        title: "幻影プリズム",
+        artist: "Unplanet",
+        //楽曲Level
+        ST: "13",
+        FD: "21",
+        OD: "26",
+        UL: ""
+    },
+    {
+        title: "800subscribers",
+        artist: "ナイト",
+        //楽曲Level
+        ST: "11",
+        FD: "22",
+        OD: "25",
+        UL: "26"
+    },
+    {
+        title: "WRΛTH : ΛβsoltioN",
+        artist: "Ailya",
+        //楽曲Level
+        ST: "13",
+        FD: "22",
+        OD: "26",
+        UL: "27"
+    }
+    {
+        title: "星恋夜",
+        artist: "輪音",
+        //楽曲Level
+        ST: "6",
+        FD: "18",
+        OD: "23",
+        UL: ""
+    },
+    {
+        title: "翠星の月渡りに捧ぐ",
+        artist: "Low_Clocoo / ローコルク",
+        //楽曲Level
+        ST: "10",
+        FD: "17",
+        OD: "24",
+        UL: "25"
+    },
+    {
+        title: "SUPERLUMINAL X",
+        artist: "DJ KorDai",
+        //楽曲Level
+        ST: "8",
+        FD: "16",
+        OD: "25",
+        UL: ""
+    },
+    {
+        title: "Inherited Memory",
+        artist: "DryDry",
+        //楽曲Level
+        ST: "12",
+        FD: "20",
+        OD: "25",
+        UL: "26"
+    },
+    {
+        title: "Connected Fairytale",
+        artist: "R-oa",
+        //楽曲Level
+        ST: "13",
+        FD: "22",
+        OD: "24",
+        UL: "25"
+    },
+    {
+        title: "Silver Knight's Oath",
+        artist: "さるひこ",
+        //楽曲Level
+        ST: "10",
+        FD: "17",
+        OD: "24",
+        UL: ""
     }
 ];
 
