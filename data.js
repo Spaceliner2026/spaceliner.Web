@@ -504,7 +504,7 @@ const MUSIC_DATA = [
         FD: "22",
         OD: "26",
         UL: "27"
-    }
+    },
     {
         title: "星恋夜",
         artist: "輪音",
