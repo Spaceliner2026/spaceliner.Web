@@ -388,3 +388,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // 既存の処理...
   initHeroSlider();
 });
+
+
+// スマホ向け 丸型ボタン＆ドロワーメニュー制御
+function initMobileCircleMenu() {
+  const menuBtn = document.getElementById('js-mobile-menu-btn');
+  const drawer = document.getElementById('js-mobile-drawer');
+  const overlay = document.getElementById('js-mobile-overlay');
+
+  if (!menuBtn || !drawer) return;
+
+  function toggleMenu() {
+    menuBtn.classList.toggle('is-active');
+    drawer.classList.toggle('is-open');
+    if (overlay) overlay.classList.toggle('is-active');
+  }
+
+  function closeMenu() {
+    menuBtn.classList.remove('is-active');
+    drawer.classList.remove('is-open');
+    if (overlay) overlay.classList.remove('is-active');
+  }
+
+  menuBtn.addEventListener('click', toggleMenu);
+  if (overlay) overlay.addEventListener('click', closeMenu);
+
+  // メニュー内のリンクをタップした時に自動で閉じる
+  const drawerLinks = drawer.querySelectorAll('a');
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+}
+
+// DOMContentLoaded で起動
+document.addEventListener('DOMContentLoaded', () => {
+  // その他の処理...
+  initMobileCircleMenu();
+});
