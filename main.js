@@ -425,3 +425,64 @@ document.addEventListener('DOMContentLoaded', () => {
   // その他の処理...
   initMobileCircleMenu();
 });
+
+
+// DOMContentLoaded 内に追加
+document.addEventListener('DOMContentLoaded', () => {
+  // 既存の処理...
+  initColumn();
+});
+
+// ==========================================
+// Render Column & Modal
+// ==========================================
+function initColumn() {
+  const columnContainer = document.getElementById('js-column-grid');
+  if (!columnContainer || typeof COLUMN_DATA === 'undefined') return;
+
+  // 一覧の描画
+  columnContainer.innerHTML = COLUMN_DATA.map((item, index) => `
+    <article class="c-columnCard" onclick="openColumnModal(${index})">
+      <div class="c-columnCard__header">
+        <span class="c-columnCard__date">${item.date || ''}</span>
+        <span class="c-columnCard__tag">${item.tag || 'COLUMN'}</span>
+      </div>
+      <h3 class="c-columnCard__title">${item.title || '無題'}</h3>
+      <p class="c-columnCard__summary">${item.summary || ''}</p>
+      <div class="c-columnCard__footer">
+        <span class="c-columnCard__author">By ${item.author || '開発者'}</span>
+        <span class="c-columnCard__more">READ MORE &rarr;</span>
+      </div>
+    </article>
+  `).join('');
+
+  // モーダル閉じるイベント
+  const modal = document.getElementById('js-column-modal');
+  const closeBtn = document.getElementById('js-column-modal-close');
+  const bg = document.getElementById('js-column-modal-bg');
+
+  if (modal) {
+    const closeModal = () => modal.classList.remove('is-open');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (bg) bg.addEventListener('click', closeModal);
+  }
+}
+
+// コラム用モーダルを開く
+function openColumnModal(index) {
+  const modal = document.getElementById('js-column-modal');
+  if (!modal || typeof COLUMN_DATA === 'undefined') return;
+
+  const item = COLUMN_DATA[index];
+  if (!item) return;
+
+  document.getElementById('js-column-modal-date').innerText = item.date || '';
+  document.getElementById('js-column-modal-tag').innerText = item.tag || 'COLUMN';
+  document.getElementById('js-column-modal-title').innerText = item.title || '';
+  
+  // 改行コード（\n）を <br> に変換して反映
+  const formattedBody = (item.body || '').replace(/\n/g, '<br>');
+  document.getElementById('js-column-modal-body').innerHTML = formattedBody;
+
+  modal.classList.add('is-open');
+}

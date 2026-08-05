@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COLUMN | Spaceliner - 4+1 Rhythm Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="page-column">
+
+  <!-- 背景描画用Canvas -->
+  <canvas id="js-space-bg"></canvas>
+
+  <div class="l-wrapper">
+
+    <!-- Header (PC表示) -->
+    <header class="l-header" id="l-header">
+      <div class="l-header__inner">
+        <h1 class="l-header__logo">
+          <a href="index.html">
+            <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="logo-icon">
+          </a>
+        </h1>
+        <nav class="l-header__nav" id="js-nav-pc">
+          <ul class="l-header__navList">
+            <li class="l-header__navItem"><a href="index.html">TOP<span>トップ</span></a></li>
+            <li class="l-header__navItem"><a href="news.html">NEWS<span>お知らせ</span></a></li>
+            <li class="l-header__navItem"><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+            <li class="l-header__navItem"><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
+            <li class="l-header__navItem"><a href="column.html" class="is-active">COLUMN<span>コラム</span></a></li>
+            <li class="l-header__navItem"><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- スマホ専用：右上固定の「丸型」三本線ボタン -->
+    <button class="c-mobile-menu-btn" id="js-mobile-menu-btn" aria-label="メニューを開く">
+      <span class="c-mobile-menu-btn__line"></span>
+      <span class="c-mobile-menu-btn__line"></span>
+      <span class="c-mobile-menu-btn__line"></span>
+    </button>
+
+    <!-- スマホ専用：スライドインするナビゲーションドロワー -->
+    <div class="c-mobile-drawer" id="js-mobile-drawer">
+      <div class="c-mobile-drawer__header">
+        <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="drawer-logo">
+        <span class="drawer-title">Spaceliner</span>
+      </div>
+      <ul class="c-mobile-drawer__list">
+        <li><a href="index.html">TOP<span>トップ</span></a></li>
+        <li><a href="news.html">NEWS<span>お知らせ</span></a></li>
+        <li><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+        <li><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
+        <li><a href="column.html" class="is-active">COLUMN<span>コラム</span></a></li>
+        <li><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+      </ul>
+    </div>
+
+    <!-- スマホ専用：背景暗幕 -->
+    <div class="c-mobile-drawer__overlay" id="js-mobile-overlay"></div>
+
+    <!-- 初回訪問時 BGM確認モーダル -->
+    <div class="c-bgm-modal" id="js-bgm-modal" style="display: none;">
+      <div class="c-bgm-modal__content">
+        <div class="c-bgm-modal__icon">🎵</div>
+        <h3 class="c-bgm-modal__title">SOUND SETTING</h3>
+        <p class="c-bgm-modal__desc">バックグラウンドミュージックを再生しますか？<br><small>※後から画面右下のボタンでいつでも切り替えられます</small></p>
+        <div class="c-bgm-modal__btns">
+          <button class="c-btn c-btn--secondary" id="js-bgm-no">オフで開始</button>
+          <button class="c-btn c-btn--primary" id="js-bgm-yes">BGMを再生</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右下の固定トグルボタン -->
+    <div class="c-bgm-control">
+      <button id="js-bgm-trigger" class="c-bgm-btn" aria-label="BGM Play/Mute">
+        <span class="c-bgm-btn__icon">🎵</span>
+        <span class="c-bgm-btn__text">BGM OFF</span>
+      </button>
+    </div>
+
+    <audio id="js-bgm-audio" src="KENP.wav" loop preload="auto"></audio>
+
+    <!-- Main Content -->
+    <main class="l-main">
+      
+      <!-- ページヘッダー -->
+      <section class="p-page-header">
+        <div class="l-container">
+          <h2 class="p-page-header__title">DEVELOPER COLUMN</h2>
+          <p class="p-page-header__subtitle">開発裏話・システム解説・デザインのこだわり</p>
+        </div>
+      </section>
+
+      <!-- コラム一覧セクション -->
+      <section class="p-column-main l-section">
+        <div class="l-container">
+          <div id="js-column-grid" class="p-column-grid">
+            <!-- main.js で動的に生成されます -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- コラム本文モーダル -->
+    <div id="js-column-modal" class="c-modal" aria-hidden="true">
+      <div id="js-column-modal-bg" class="c-modal__bg"></div>
+      <div class="c-modal__content">
+        <button id="js-column-modal-close" class="c-modal__close" aria-label="閉じる">&times;</button>
+        <div class="c-modal__header">
+          <div class="c-modal__meta">
+            <span id="js-column-modal-date" class="c-modal__date"></span>
+            <span id="js-column-modal-tag" class="c-modal__tag"></span>
+          </div>
+          <h3 id="js-column-modal-title" class="c-modal__title"></h3>
+          <p id="js-column-modal-author" class="c-modal__author"></p>
+        </div>
+        <div id="js-column-modal-body" class="c-modal__body"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="l-footer">
+      <div class="l-footer__inner">
+        <div class="l-footer__sns">
+          <h3 class="l-footer__snsTitle">OFFICIAL SNS<span>公式SNSアカウント</span></h3>
+          <div class="l-footer__snsList">
+            <a href="https://x.com/ONSOU_2025" class="c-sns-card c-sns-card--x" target="_blank" rel="noopener" aria-label="公式X (Twitter)">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>X (Twitter)</strong>
+                <small>最新ニュース・アプデ情報</small>
+              </div>
+            </a>
+            <a href="https://youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw?si=KaW3H21GmdWdqMTu" class="c-sns-card c-sns-card--yt" target="_blank" rel="noopener" aria-label="公式YouTube">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>YouTube</strong>
+                <small>楽曲PV・試聴動画</small>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="l-footer__logo">Spaceliner</div>
+        <p class="l-footer__copy">&copy; 2025-2026 PROJECT SPACELINER. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="bg-engine.js"></script>
+</body>
+</html>
