@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TERMS OF SERVICE | Spaceliner - 4+1 Rhythm Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="page-terms">
+
+  <!-- 背景描画用Canvas -->
+  <canvas id="js-space-bg"></canvas>
+
+  <div class="l-wrapper">
+
+    <!-- Header (PC表示) -->
+    <header class="l-header" id="l-header">
+      <div class="l-header__inner">
+        <h1 class="l-header__logo">
+          <a href="index.html">
+            <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="logo-icon">
+          </a>
+        </h1>
+        <nav class="l-header__nav" id="js-nav-pc">
+          <ul class="l-header__navList">
+            <li class="l-header__navItem"><a href="index.html">TOP<span>トップ</span></a></li>
+            <li class="l-header__navItem"><a href="news.html">NEWS<span>お知らせ</span></a></li>
+            <li class="l-header__navItem"><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+            <li class="l-header__navItem"><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
+            <li class="l-header__navItem"><a href="column.html">COLUMN<span>コラム</span></a></li>
+            <li class="l-header__navItem"><a href="terms.html" class="is-active">TERMS<span>利用規約</span></a></li>
+            <li class="l-header__navItem"><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- スマホ専用：右上固定の「丸型」三本線ボタン -->
+    <button class="c-mobile-menu-btn" id="js-mobile-menu-btn" aria-label="メニューを開く">
+      <span class="c-mobile-menu-btn__line"></span>
+      <span class="c-mobile-menu-btn__line"></span>
+      <span class="c-mobile-menu-btn__line"></span>
+    </button>
+
+    <!-- スマホ専用：スライドインするナビゲーションドロワー -->
+    <div class="c-mobile-drawer" id="js-mobile-drawer">
+      <div class="c-mobile-drawer__header">
+        <img src="spaceliner_icon_1024.png" alt="Spaceliner" class="drawer-logo">
+        <span class="drawer-title">Spaceliner</span>
+      </div>
+      <ul class="c-mobile-drawer__list">
+        <li><a href="index.html">TOP<span>トップ</span></a></li>
+        <li><a href="news.html">NEWS<span>お知らせ</span></a></li>
+        <li><a href="howtoplay.html">HOW TO PLAY<span>遊び方</span></a></li>
+        <li><a href="music.html">MUSIC<span>楽曲リスト</span></a></li>
+        <li><a href="column.html">COLUMN<span>コラム</span></a></li>
+        <li><a href="terms.html" class="is-active">TERMS<span>利用規約</span></a></li>
+        <li><a href="download.html">DOWNLOAD<span>ダウンロード</span></a></li>
+      </ul>
+    </div>
+
+    <!-- スマホ専用：背景暗幕 -->
+    <div class="c-mobile-drawer__overlay" id="js-mobile-overlay"></div>
+
+    <!-- 初回訪問時 BGM確認モーダル -->
+    <div class="c-bgm-modal" id="js-bgm-modal" style="display: none;">
+      <div class="c-bgm-modal__content">
+        <div class="c-bgm-modal__icon">🎵</div>
+        <h3 class="c-bgm-modal__title">SOUND SETTING</h3>
+        <p class="c-bgm-modal__desc">バックグラウンドミュージックを再生しますか？<br><small>※後から画面右下のボタンでいつでも切り替えられます</small></p>
+        <div class="c-bgm-modal__btns">
+          <button class="c-btn c-btn--secondary" id="js-bgm-no">オフで開始</button>
+          <button class="c-btn c-btn--primary" id="js-bgm-yes">BGMを再生</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右下の固定トグルボタン -->
+    <div class="c-bgm-control">
+      <button id="js-bgm-trigger" class="c-bgm-btn" aria-label="BGM Play/Mute">
+        <span class="c-bgm-btn__icon">🎵</span>
+        <span class="c-bgm-btn__text">BGM OFF</span>
+      </button>
+    </div>
+
+    <audio id="js-bgm-audio" src="KENP.wav" loop preload="auto"></audio>
+
+    <!-- Main Content -->
+    <main class="l-main">
+      
+      <!-- ページヘッダー -->
+      <section class="p-page-header">
+        <div class="l-container">
+          <h2 class="p-page-header__title">TERMS OF SERVICE</h2>
+          <p class="p-page-header__subtitle">Spaceliner 利用規約</p>
+        </div>
+      </section>
+
+      <!-- 利用規約本文セクション -->
+      <section class="p-terms-main l-section">
+        <div class="l-container">
+          <div class="p-terms-box">
+            
+            <p class="p-terms-lead">
+              本利用規約（以下「本規約」）は、音奏開発チーム（以下「当方」）が提供するゲームアプリ『Spaceliner』（以下「本サービス」）の利用条件を定めるものです。ユーザーは、本サービスを利用することで、本規約に同意したものとみなされます。
+            </p>
+
+            <div class="p-terms-section">
+              <h3>第1条（知的財産権）</h3>
+              <ol>
+                <li>本サービスに含まれるプログラム、画像、テキスト、ロゴの著作権その他の知的財産権は、当方に帰属します。</li>
+                <li>本サービスに使用されている楽曲・音源の著作権は、各音源提供者に帰属します。</li>
+                <li>ユーザーは、本規約で許諾された範囲を除き、これらのコンテンツを無断で複製、転載、抽出、改ざん、または二次配布することはできません。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第2条（プレイ動画および二次創作）</h3>
+              <ol>
+                <li>ユーザーは、本サービスのプレイ動画やスクリーンショットを、YouTube、SNS等の外部プラットフォームへ投稿することができます。</li>
+                <li>前項に基づき、各プラットフォームが提供する収益化プログラム（広告収入等）を利用することを許可します。</li>
+                <li>楽曲のみを視聴させることを目的とした動画（作業用BGM等）の投稿、および楽曲データの抽出・二次配布は、各音源提供者の権利を侵害するため、固く禁止します。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第3条（禁止事項）</h3>
+              <p>ユーザーは、本サービスの利用にあたり、以下の行為を行ってはなりません。</p>
+              <ol>
+                <li>チートツール、自動操作ソフト、その他不当な方法を用いてスコアやランキングを操作する行為。</li>
+                <li>本サービスの解析、リバースエンジニアリング、データの抽出。</li>
+                <li>他のユーザー、当方、または第三者の権利を侵害する行為。</li>
+                <li>公序良俗に反する行為、またはそれに準ずる不適切な名前の使用。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第4条（規約違反への対処）</h3>
+              <ol>
+                <li>ユーザーが本規約の条項に違反した場合、当方は事前の通知なく、当該ユーザーによる本サービスの利用停止、ランキングデータの削除、その他必要と判断する措置を講じることができるものとします。</li>
+                <li>ユーザーの規約違反行為により当方または第三者に損害が生じた場合、ユーザーは自己の責任と費用においてこれを解決し、当該損害を賠償するものとします。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第5条（反社会的勢力の排除）</h3>
+              <p>ユーザーは、自らが反社会的勢力（暴力団、暴力団員、これらに準ずる者）に該当しないこと、および将来にわたっても該当しないことを表明し、保証するものとします。これに違反した場合、当方は催告なく本サービスの利用を停止できます。</p>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第6条（健康上の注意）</h3>
+              <ol>
+                <li>本サービスには激しい光の点滅や移動演出が含まれます。体調が優れない場合や、光感受性発作の既往歴がある場合は、利用を控えてください。</li>
+                <li>利用中にめまい、吐き気、視覚の異常等を感じた場合は、直ちに利用を中止し、医師の診察を受けてください。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第7条（免責事項）</h3>
+              <ol>
+                <li>当方は、本サービスの動作保証、特定の目的への適合性、およびデータの完全性を保証しません。</li>
+                <li>本サービスの利用により生じた端末の故障、データ消失、体調不良、その他の損害について、当方は一切の責任を負いません。</li>
+                <li>当方は、事前の通知なく本サービスの内容変更、アップデート、または提供の停止を行うことができるものとします。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第8条（規約の変更）</h3>
+              <p>当方は、必要に応じて本規約を変更できるものとします。変更後の規約は、本サービス内または公式サイトに掲示した時点から効力を生じるものとします。</p>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第9条（準拠法および裁判管轄）</h3>
+              <ol>
+                <li>本規約の解釈にあたっては、日本法を準拠法とします。</li>
+                <li>本サービスに関して紛争が生じた場合には、当方の所在地を管轄する裁判所を第一審の専属的合意管轄裁判所とします。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-section">
+              <h3>第10条（ユーザー制作譜面の投稿および取り扱い）</h3>
+              <ol>
+                <li>ユーザーは、当方が提供する譜面制作ソフト等を用いて作成した譜面データ（以下「投稿データ」）を、当方に対し、所定の方法で提供・アップロードすることができます。</li>
+                <li>ユーザーは、投稿データについて、自らが作成したものであること、および第三者の権利（著作権等）を侵害していないことを保証するものとします。</li>
+                <li>当方は、投稿データを審査し、適切と判断した場合に限り、本サービス内に採用・追加することができます。採用の可否およびその基準については当方の裁量によるものとします。</li>
+                <li>投稿データが本サービスに採用された場合、ユーザーは当方に対し、当該データを本サービス内で無償かつ無期限に利用（改変、調整、配信を含む）することを許諾するものとし、著作者人格権を行使しないものとします。</li>
+                <li>既存の譜面に対する修正案や追加案についても、本条の規定が適用されるものとします。</li>
+              </ol>
+            </div>
+
+            <div class="p-terms-footer">
+              <p class="p-terms-history">
+                【附則】<br>
+                2026年2月18日 制定<br>
+                2026年2月27日 改定<br>
+                2026年3月02日 改定
+              </p>
+              <p class="p-terms-author">音奏開発チーム</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="l-footer">
+      <div class="l-footer__inner">
+        <div class="l-footer__sns">
+          <h3 class="l-footer__snsTitle">OFFICIAL SNS<span>公式SNSアカウント</span></h3>
+          <div class="l-footer__snsList">
+            <a href="https://x.com/ONSOU_2025" class="c-sns-card c-sns-card--x" target="_blank" rel="noopener" aria-label="公式X (Twitter)">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>X (Twitter)</strong>
+                <small>最新ニュース・アプデ情報</small>
+              </div>
+            </a>
+            <a href="https://youtube.com/channel/UCoAnS9vg0TWhv64tVN2DvXw?si=KaW3H21GmdWdqMTu" class="c-sns-card c-sns-card--yt" target="_blank" rel="noopener" aria-label="公式YouTube">
+              <div class="c-sns-card__icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <div class="c-sns-card__text">
+                <strong>YouTube</strong>
+                <small>楽曲PV・試聴動画</small>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="l-footer__logo">Spaceliner</div>
+        <p class="l-footer__copy">&copy; 2025-2026 PROJECT SPACELINER. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+  <script src="bg-engine.js"></script>
+</body>
+</html>
