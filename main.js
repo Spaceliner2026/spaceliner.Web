@@ -486,3 +486,6 @@ function openColumnModal(index) {
 
   modal.classList.add('is-open');
 }
+
+
+
