@@ -1,6 +1,12 @@
 // ニュースデータ
 const NEWS_DATA = [
     {
+      "date": "2026/08/17",
+      "title": "【アップデート】Ver 1.3.32について",
+      "body": "【アップデート】v1.3.32 アップデート配信のお知らせ\n\n平素より『Spaceliner(スぺライ)』をプレイいただき、誠にありがとうございます。\n\n本日、バージョン1.3.32のアップデートを配信いたしました。\n主なアップデート内容は以下の通りです。\n\n■ アップデート内容（v1.3.32）\n・東方アレンジ楽曲の追加： 新たに東方プロジェクトの楽曲を追加いたしました。\n・演奏画面UIの改修： レーンおよび判定エフェクト・視認性を向上させるUI改善を実施いたしました。\n・不具合修正： システム内の軽微な不具合を修正いたしました。\n\n乗組員の皆様にさらに快適で楽しいプレイ体験をお届けできるよう、引き続き改善を進めてまいります。\n\n今後とも『Spaceliner(スぺライ)』を何卒よろしくお願い申し上げます。\n\n『Spaceliner(スぺライ)』制作チーム\n\n",
+      "linkUrl": ""
+    },
+    {
       "date": "2026/08/06",
       "title": "【お知らせ】今後の運営体制およびSNS運用ルールの見直しに関するご案内",
       "body": "【お知らせ】今後の運営体制およびSNS運用ルールの見直しに関するご案内\n \n 平素より『Spaceliner(スぺライ)』をプレイいただき、誠にありがとうございます。\n \n この度、制作チーム（Gang）におけるクリエイター様および関係者の皆様へのご連絡対応、ならびに公式SNSの運用に関しまして、当方の配慮不足や確認漏れにより、関係者の皆様にご迷惑とご不快な思いをおかけする事態が発生いたしました。\n \n 本件につきまして、ご迷惑をおかけいたしました関係者の皆様、ならびに日頃より作品を応援してくださっている乗組員の皆様に、深くお詫び申し上げます。\n \n 制作チームといたしましては、今回の事態を重く受け止め、今後の信頼回復と円滑なプロジェクト運営のため、本日より以下の改善策および運用ルールの見直しを実施・徹底いたします。\n \n ■ 今後の改善策・運営体制につきまして\n \n 1. 公募情報および企画情報の公式ウェブサイトへの集約・明記\n 楽曲公募をはじめとする各種企画の募集要項、進行状況、注意事項等の公式情報を、すべて「公式ウェブサイト」上に明記・集約いたします。SNS上の情報散逸を防ぎ、ご参加いただく皆様が常に最新かつ正確な状況を確認できる環境を整えます。\n \n 2. 連絡・返信体制の強化とガイドラインの制定\n 楽曲ご応募者様および各種お問い合わせに対する連絡確認フローを見直し、未返信や確認漏れが発生しない管理体制を構築いたします。また、連絡遅延を防ぐため、受領確認・返信期限等のルールを徹底いたします。\n \n 3. 公式SNS運用における配慮と倫理規範の徹底\n 公式SNSアカウントおよび関連アカウントの運用方針を再定義し、フォロー・いいね・発言等における配慮を徹底いたします。公私混同や不適切なSNS行動を防止し、公式としての節度ある運用を徹底いたします。\n \n 4. 企画プロセスの見直しと情報管理の強化\n コラボ企画や各種イベントの実施にあたり、参加クリエイター様との合意形成および情報共有がしっかりと確認できるまで、先行した告知や第三者への情報展開を行わないフローへ変更いたします。\n \n 『Spaceliner』が多くの皆様に支えられて成り立つ作品であることを改めて深く認識し、クリエイターの皆様と真摯に向き合い、プレイヤーの皆様に安心して楽しんでいただける環境づくりに努めてまいります。\n \n 今後とも『Spaceliner』を何卒よろしくお願い申し上げます。\n \n 2026年8月6日\n 『Spaceliner』制作チーム\n",
@@ -238,12 +244,12 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "2",
         FD: "12",
-        OD: "20",
+        OD: "21",
         UL: ""
     },
     {
         title: "Re.Mjoete",
-        artist: "カンキツ / POLAN",
+        artist: "カンキツ/POLAN",
         //楽曲Level
         ST: "5",
         FD: "15",
@@ -256,7 +262,7 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "7",
         FD: "16",
-        OD: "22",
+        OD: "23",
         UL: ""
     },
     {
@@ -265,11 +271,11 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "4",
         FD: "14",
-        OD: "21",
+        OD: "22",
         UL: ""
     },
     {
-        title: "$E=mc~2$",
+        title: "$E=mc^2$",
         artist: "カンキツ",
         //楽曲Level
         ST: "10",
@@ -279,7 +285,7 @@ const MUSIC_DATA = [
     },
     {
         title: "Divine Retribution",
-        artist: "カンキツ / ポッキー",
+        artist: "カンキツ/ポッキー",
         //楽曲Level
         ST: "8",
         FD: "20",
@@ -310,8 +316,8 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "8",
         FD: "17",
-        OD: "23",
-        UL: ""
+        OD: "24",
+        UL: "26"
     },
     {
         title: "Incandescence",
@@ -328,7 +334,7 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "3",
         FD: "13",
-        OD: "22",
+        OD: "23",
         UL: "24"
     },
     {
@@ -337,7 +343,7 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "2",
         FD: "14",
-        OD: "23",
+        OD: "24",
         UL: ""
     },
     {
@@ -383,7 +389,7 @@ const MUSIC_DATA = [
         ST: "5",
         FD: "16",
         OD: "24",
-        UL: "25"
+        UL: "24"
     },
     {
         title: "氷点",
@@ -395,7 +401,7 @@ const MUSIC_DATA = [
         UL: "26"
     },
     {
-        title: "Ⅵ : Flamma(Spaceliner Ver.)",
+        title: "VI：Flamma(Spaceliner Ver.)",
         artist: "Chikanya",
         //楽曲Level
         ST: "5",
@@ -410,7 +416,7 @@ const MUSIC_DATA = [
         ST: "7",
         FD: "21",
         OD: "25",
-        UL: "25"
+        UL: "26"
     },
     {
         title: "Abyssal Marionette",
@@ -427,11 +433,11 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "9",
         FD: "18",
-        OD: "26",
+        OD: "27",
         UL: ""
     },
     {
-        title: "Ethereal",
+        title: "Ethereal ",
         artist: "DJ Chiyo",
         //楽曲Level
         ST: "13",
@@ -454,7 +460,7 @@ const MUSIC_DATA = [
         //楽曲Level
         ST: "7",
         FD: "20",
-        OD: "24",
+        OD: "25",
         UL: ""
     },
     {
@@ -476,7 +482,7 @@ const MUSIC_DATA = [
         UL: ""
     },
     {
-        title: "Blitzkring UK",
+        title: "Blitzkrieg UK",
         artist: "サイタケ",
         //楽曲Level
         ST: "6",
@@ -485,21 +491,21 @@ const MUSIC_DATA = [
         UL: ""
     },
     {
-        title: "Eternal Ritua",
-        artist: "​HarryArtz",
+        title: "Eternal Ritual",
+        artist: "HarryArtz",
         //楽曲Level
         ST: "11",
         FD: "22",
-        OD: "26",
+        OD: "25",
         UL: "26"
     },
     {
-        title: "Object:MALIGNYX",
-        artist: "​Nibiryu",
+        title: "Object MALIGNYX",
+        artist: "Nibiryu",
         //楽曲Level
         ST: "13",
         FD: "22",
-        OD: "26",
+        OD: "25",
         UL: "27"
     },
     {
@@ -521,7 +527,7 @@ const MUSIC_DATA = [
         UL: "26"
     },
     {
-        title: "WRΛTH : ΛβsoltioN",
+        title: "WRΛTH：ΛβsoltioN",
         artist: "Ailya",
         //楽曲Level
         ST: "13",
@@ -582,8 +588,36 @@ const MUSIC_DATA = [
         FD: "17",
         OD: "24",
         UL: ""
+    },
+    {
+        title: "Help me, ERINNNNNN!!",
+        artist: "ビートまりお×まろん / 原作：ZUN（上海アリス幻樂団）",
+        //楽曲Level
+        ST: "11",
+        FD: "20",
+        OD: "24",
+        UL: ""
+    },
+    {
+        title: "ナイト・オブ・ナイツ",
+        artist: "ビートまりお×まろん / 原作：ZUN（上海アリス幻樂団）/ 編曲：ぴんがえる",
+        //楽曲Level
+        ST: "11",
+        FD: "21",
+        OD: "26",
+        UL: ""
+    },
+    {
+        title: "最終鬼畜妹フランドール・S",
+        artist: "ビートまりお×まろん / 原作：ZUN（上海アリス幻樂団）",
+        //楽曲Level
+        ST: "9",
+        FD: "20",
+        OD: "25",
+        UL: ""
     }
 ];
+
 
 // FAQデータ (support.html用)
 const FAQ_DATA = [
