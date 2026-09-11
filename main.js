@@ -487,5 +487,118 @@ function openColumnModal(index) {
   modal.classList.add('is-open');
 }
 
+// ==========================================
+// 募集（RECRUIT）ページの初期化処理
+// ==========================================
+
+// テキスト内の箇条書き（- または 1. ）を HTML リストに変換するヘルパー関数
+function parseTextList(text) {
+    if (!text) return '';
+
+    const lines = text.split('\n');
+    let resultHtml = '';
+    let inUnorderedList = false;
+    let inOrderedList = false;
+
+    lines.forEach(line => {
+        const trimmed = line.trim();
+
+        if (trimmed.startsWith('- ')) {
+            if (inOrderedList) {
+                resultHtml += '</ol>';
+                inOrderedList = false;
+            }
+            if (!inUnorderedList) {
+                resultHtml += '<ul class="c-recruit-list-ul">';
+                inUnorderedList = true;
+            }
+            resultHtml += `<li>${trimmed.substring(2)}</li>`;
+        }
+        else if (/^\d+\.\s/.test(trimmed)) {
+            if (inUnorderedList) {
+                resultHtml += '</ul>';
+                inUnorderedList = false;
+            }
+            if (!inOrderedList) {
+                resultHtml += '<ol class="c-recruit-list-ol">';
+                inOrderedList = true;
+            }
+            resultHtml += `<li>${trimmed.replace(/^\d+\.\s/, '')}</li>`;
+        }
+        else {
+            if (inUnorderedList) {
+                resultHtml += '</ul>';
+                inUnorderedList = false;
+            }
+            if (inOrderedList) {
+                resultHtml += '</ol>';
+                inOrderedList = false;
+            }
+            if (trimmed !== '') {
+                resultHtml += `<p>${trimmed}</p>`;
+            }
+        }
+    });
+
+    if (inUnorderedList) resultHtml += '</ul>';
+    if (inOrderedList) resultHtml += '</ol>';
+
+    return resultHtml;
+}
+
+// 描画メイン関数
+function initRecruit() {
+    const container = document.getElementById('js-recruit-list');
+    if (!container) return; // 募集ページ以外の時は何もしない
+
+    // RECRUIT_DATA が定義されていない、または空配列の場合
+    if (typeof RECRUIT_DATA === 'undefined' || !Array.isArray(RECRUIT_DATA) || RECRUIT_DATA.length === 0) {
+        container.innerHTML = '<p class="p-recruit-empty">現在募集中の企画はありません。</p>';
+        return;
+    }
+
+    container.innerHTML = RECRUIT_DATA.map(item => {
+        const isClosed = item.status === 'closed';
+        const badgeText = isClosed ? '受付終了' : '募集中';
+        const badgeClass = isClosed ? 'is-closed' : 'is-active';
+
+        const detailsHtml = item.details ? item.details.map(d => `
+      <dl class="c-recruitCard__dl">
+        <dt>${d.label}</dt>
+        <dd>${parseTextList(d.value)}</dd>
+      </dl>
+    `).join('') : '';
+
+        return `
+      <article class="c-recruitCard ${isClosed ? 'c-recruitCard--closed' : ''}">
+        <div class="c-recruitCard__header">
+          <span class="c-recruitCard__badge ${badgeClass}">${badgeText}</span>
+          <span class="c-recruitCard__category">${item.category}</span>
+          <span class="c-recruitCard__period">募集期間: ${item.period}</span>
+        </div>
+        <h3 class="c-recruitCard__title">${item.title}</h3>
+        <div class="c-recruitCard__desc">${parseTextList(item.desc)}</div>
+        
+        ${detailsHtml ? `<div class="c-recruitCard__details">${detailsHtml}</div>` : ''}
+
+        <div class="c-recruitCard__action">
+          ${isClosed ? `
+            <button class="c-btn c-btn--disabled" disabled>募集は終了しました</button>
+          ` : `
+            <a href="${item.formUrl}" target="_blank" rel="noopener" class="c-btn c-btn--primary c-btn--glow">
+              応募フォームを開く（外部サイト）
+            </a>
+          `}
+        </div>
+      </article>
+    `;
+    }).join('');
+}
+
+// ページ読み込み完了時に自動実行
+document.addEventListener('DOMContentLoaded', () => {
+    initRecruit();
+});
+
 
 
