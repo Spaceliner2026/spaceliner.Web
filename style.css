@@ -1879,3 +1879,185 @@ body::before {
     gap: 12px;
   }
 }
+
+/* ==========================================
+   Recruit Page Styles
+   ========================================== */
+.p-recruit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.c-recruitCard {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.3s ease;
+}
+
+    .c-recruitCard:hover {
+        border-color: rgba(0, 243, 255, 0.6);
+    }
+
+.c-recruitCard--closed {
+    opacity: 0.6;
+    border-color: rgba(148, 163, 184, 0.2);
+}
+
+.c-recruitCard__header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.c-recruitCard__badge {
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+    .c-recruitCard__badge.is-active {
+        background: rgba(0, 243, 255, 0.2);
+        color: #00f3ff;
+        border: 1px solid #00f3ff;
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+
+    .c-recruitCard__badge.is-closed {
+        background: rgba(148, 163, 184, 0.2);
+        color: #94a3b8;
+        border: 1px solid #94a3b8;
+    }
+
+.c-recruitCard__category {
+    font-size: 0.85rem;
+    color: #00f3ff;
+    font-weight: bold;
+}
+
+.c-recruitCard__period {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-left: auto;
+}
+
+.c-recruitCard__title {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.c-recruitCard__desc {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.c-recruitCard__details {
+    background: rgba(11, 15, 25, 0.6);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+}
+
+.c-recruitCard__dl {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+    .c-recruitCard__dl:last-child {
+        margin-bottom: 0;
+    }
+
+    .c-recruitCard__dl dt {
+        width: 120px;
+        flex-shrink: 0;
+        color: #00f3ff;
+        font-weight: bold;
+    }
+
+    .c-recruitCard__dl dd {
+        color: #e2e8f0;
+    }
+
+.c-recruitCard__action {
+    text-align: center;
+}
+
+.c-btn--glow {
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+    display: inline-block;
+    padding: 12px 36px;
+    text-decoration: none;
+}
+
+.c-btn--disabled {
+    background: #334155;
+    color: #94a3b8;
+    cursor: not-allowed;
+    border: none;
+    padding: 12px 36px;
+    border-radius: 6px;
+}
+
+.p-recruit-empty {
+    text-align: center;
+    color: #94a3b8;
+    padding: 60px 0;
+}
+
+@media (max-width: 640px) {
+    .c-recruitCard {
+        padding: 20px;
+    }
+
+    .c-recruitCard__period {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .c-recruitCard__dl {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+        .c-recruitCard__dl dt {
+            width: auto;
+        }
+}
+/* 募集ページ用 箇条書きスタイル */
+.c-recruit-list-ul,
+.c-recruit-list-ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.c-recruit-list-ul li {
+  list-style: disc;
+  margin-bottom: 4px;
+  color: #e2e8f0;
+}
+
+.c-recruit-list-ol li {
+  list-style: decimal;
+  margin-bottom: 4px;
+  color: #e2e8f0;
+}
+
+.c-recruitCard__desc p {
+  margin-bottom: 8px;
+}
+
+.c-recruitCard__desc p:last-child {
+  margin-bottom: 0;
+}
